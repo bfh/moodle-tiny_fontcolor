@@ -32,7 +32,7 @@ class plugininfo extends plugin implements plugin_with_menuitems {
 
     public static function get_available_menuitems(): array {
         return [
-            'tiny_bfhfontcolor/plugin',
+            'tiny_bfhfontcolor/bfhfontcolor',
         ];
     }
 }

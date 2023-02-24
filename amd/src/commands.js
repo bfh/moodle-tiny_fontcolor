@@ -24,6 +24,8 @@
 import {getButtonImage} from 'editor_tiny/utils';
 import {get_string as getString} from 'core/str';
 import {
+    fgButtonName,
+    bgButtonName,
     component,
 } from './common';
 
@@ -51,21 +53,30 @@ export const getSetup = async() => {
         menuItemFgcolor,
         menuItemBgcolor,
     ] = await Promise.all([
-        getString('menuItemBgcolor'),
-        getString('menuItemFgcolor'),
+        getString('menuItemFgcolor', component),
+        getString('menuItemBgcolor', component),
     ]);
 
     return (editor) => {
-        editor.ui.registry.addMenuItem(menuItemFgcolor, {
-            icon: getButtonImage('text-color'),
+        editor.ui.registry.addMenuItem(fgButtonName, {
+            icon: 'text-color',
             text: menuItemFgcolor,
             onAction: () => handleAction(editor, 'fgcolor'),
         });
-        editor.ui.registry.addMenuItem(menuItemFgcolor, {
-            icon: getButtonImage('highlight-bg-color'),
+        editor.ui.registry.addMenuItem(bgButtonName, {
+            icon: 'highlight-bg-color',
             text: menuItemBgcolor,
             onAction: () => handleAction(editor, 'bgcolor'),
         });
-
+        editor.ui.registry.addButton(fgButtonName, {
+            icon: 'text-color',
+            tooltip: menuItemFgcolor,
+            onAction: () => handleAction(editor, 'fgcolor'),
+        });
+        editor.ui.registry.addButton(bgButtonName, {
+            icon: 'highlight-bg-color',
+            tooltip: menuItemBgcolor,
+            onAction: () => handleAction(editor, 'bgcolor'),
+        });
     };
 };

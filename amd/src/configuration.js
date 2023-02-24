@@ -25,18 +25,22 @@ import {
     fgButtonName,
     bgButtonName
 } from './common';
+import {addMenubarItem, addToolbarButtons} from 'editor_tiny/utils';
 
-import {
-    addMenubarItem,
-    addToolbarButtons
-} from 'editor_tiny/utils';
+const configureToolbar = (toolbar) => {
+    toolbar = addToolbarButtons(toolbar, 'content', [fgButtonName, bgButtonName]);
+    return toolbar;
+};
+
+const configureMenu = (menu) => {
+    menu = addMenubarItem(menu, 'format', fgButtonName);
+    menu = addMenubarItem(menu, 'format', bgButtonName);
+    return menu;
+};
 
 export const configure = (instanceConfig) => {
-    const toolbar = addToolbarButtons(instanceConfig.toolbar, 'content', [fgButtonName, bgButtonName]);
-    let menu = addMenubarItem(instanceConfig.menu, 'format', fgButtonName);
-    menu = addMenubarItem(menu, 'format', fgButtonName);
     return {
-        'toolbar': toolbar,
-        'menu': menu,
+        toolbar: configureToolbar(instanceConfig.toolbar),
+        menu: configureMenu(instanceConfig.menu),
     };
 };

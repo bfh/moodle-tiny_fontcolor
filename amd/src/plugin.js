@@ -23,7 +23,6 @@
 
 import {getTinyMCE} from 'editor_tiny/loader';
 import {getPluginMetadata} from 'editor_tiny/utils';
-
 import {component, pluginName} from './common';
 import {getSetup as getCommandSetup} from './commands';
 import * as Configuration from './configuration';
@@ -34,12 +33,12 @@ export default new Promise(async(resolve) => {
     // Perform any asynchronous configuration here, and then call the PluginManager.add function.
     const [
         tinyMCE,
-        pluginMetadata,
         setupCommands,
+        pluginMetadata,
     ] = await Promise.all([
         getTinyMCE(),
-        getPluginMetadata(component, pluginName),
         getCommandSetup(),
+        getPluginMetadata(component, pluginName),
     ]);
 
     // Reminder: Any asynchronous code must be run before this point.
