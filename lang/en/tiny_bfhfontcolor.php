@@ -25,6 +25,9 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['pluginname'] = 'BFH Font colour';
-$string['pluginname'] = 'BFH Font colour';
+$string['pluginname'] = 'BFH Font color';
+$string['menuItemBgcolor'] = 'Text background color';
+$string['menuItemFgcolor'] = 'Text foreground color';
+$string['btnBgcolor'] = 'Text background color';
+$string['btnFgcolor'] = 'Text foreground color';
 $string['privacy:metadata'] = 'BFH Font colour does not store any personal data';

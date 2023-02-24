@@ -21,6 +21,7 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+import {getButtonImage} from 'editor_tiny/utils';
 import {get_string as getString} from 'core/str';
 import {
     component,
@@ -29,10 +30,12 @@ import {
 /**
  * Handle the action for your plugin.
  * @param {TinyMCE.editor} editor The tinyMCE editor instance.
+ * @param {string} texttype whether fg or bg color change to apply
  */
-const handleAction = (editor) => {
+const handleAction = (editor, texttype) => {
     // TODO Handle the action.
     window.console.log(editor);
+    window.console.log(texttype);
 };
 
 /**
@@ -45,11 +48,24 @@ const handleAction = (editor) => {
  */
 export const getSetup = async() => {
     const [
-        buttonImage,
+        menuItemFgcolor,
+        menuItemBgcolor,
     ] = await Promise.all([
-        getButtonImage('icon', component),
+        getString('menuItemBgcolor'),
+        getString('menuItemFgcolor'),
     ]);
 
     return (editor) => {
+        editor.ui.registry.addMenuItem(menuItemFgcolor, {
+            icon: getButtonImage('text-color'),
+            text: menuItemFgcolor,
+            onAction: () => handleAction(editor, 'fgcolor'),
+        });
+        editor.ui.registry.addMenuItem(menuItemFgcolor, {
+            icon: getButtonImage('highlight-bg-color'),
+            text: menuItemBgcolor,
+            onAction: () => handleAction(editor, 'bgcolor'),
+        });
+
     };
 };
