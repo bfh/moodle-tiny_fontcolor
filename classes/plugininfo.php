@@ -28,8 +28,20 @@ use context;
 use editor_tiny\plugin;
 use editor_tiny\plugin_with_menuitems;
 
+/**
+ * BFH Font colour plugin.
+ *
+ * @package     tiny_bfhfontcolor
+ * @copyright   2023 Luca Bösch <luca.boesch@bfh.ch>
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class plugininfo extends plugin implements plugin_with_menuitems {
 
+    /**
+     * Get a list of the menu items provided by this plugin.
+     *
+     * @return string[]
+     */
     public static function get_available_menuitems(): array {
         return [
             'tiny_bfhfontcolor/bfhfontcolor',
