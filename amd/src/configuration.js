@@ -28,7 +28,7 @@ import {
 import {addMenubarItem, addToolbarButtons} from 'editor_tiny/utils';
 
 const configureToolbar = (toolbar) => {
-    toolbar = addToolbarButtons(toolbar, 'content', [fgButtonName, bgButtonName]);
+    toolbar = addToolbarButtons(toolbar, 'formatting', [fgButtonName, bgButtonName]);
     return toolbar;
 };
 
