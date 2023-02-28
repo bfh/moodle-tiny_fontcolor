@@ -24,6 +24,4 @@
 export default {
     pluginName: 'tiny_bfhfontcolor/plugin',
     component: 'tiny_bfhfontcolor',
-    fgButtonName: 'tiny_bfhfontcolor_btn_fg',
-    bgButtonName: 'tiny_bfhfontcolor_btn_bg',
 };

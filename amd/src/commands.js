@@ -21,23 +21,8 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-import {get_string as getString} from 'core/str';
-import {
-    fgButtonName,
-    bgButtonName,
-    component,
-} from './common';
+import {register$c, isArrayOf, isString, mapColors} from "./colorswat";
 
-/**
- * Handle the action for your plugin.
- * @param {TinyMCE.editor} editor The tinyMCE editor instance.
- * @param {string} texttype whether fg or bg color change to apply
- */
-const handleAction = (editor, texttype) => {
-    // TODO Handle the action.
-    window.console.log(editor);
-    window.console.log(texttype);
-};
 
 /**
  * Get the setup function for the buttons.
@@ -48,34 +33,47 @@ const handleAction = (editor, texttype) => {
  * @returns {function} The registration function to call within the Plugin.add function.
  */
 export const getSetup = async() => {
-    const [
-        menuItemFgcolor,
-        menuItemBgcolor,
-    ] = await Promise.all([
-        getString('menuItemFgcolor', component),
-        getString('menuItemBgcolor', component),
-    ]);
+    const color_map = [
+        '000000', 'Black',
+        '808080', 'Gray',
+        'FFFFFF', 'White',
+        'FF0000', 'Red',
+        'FFFF00', 'Yellow',
+        '008000', 'Green',
+        '0000FF', 'Blue'
+    ];
+
+    const color_map_backcolor = [
+        '000000', 'Black',
+        '808080', 'Gray',
+        'FFFFFF', 'White',
+        '008000', 'Green',
+        '0000FF', 'Blue'
+    ];
 
     return (editor) => {
-        editor.ui.registry.addMenuItem(fgButtonName, {
-            icon: 'text-color',
-            text: menuItemFgcolor,
-            onAction: () => handleAction(editor, 'fgcolor'),
+        editor.options.set('custom_colors', false);
+        editor.options.set('color_map', color_map);
+        //const colorProcessor = editor.options.get();
+        editor.options.register('color_map_background', {
+            processor: value => {
+                if (isArrayOf(value, isString)) {
+                    return {
+                        value: mapColors(value),
+                        valid: true
+                    };
+                } else {
+                    return {
+                        valid: false,
+                        message: 'Must be an array of strings.'
+                    };
+                }
+            },
+            default: color_map_backcolor,
         });
-        editor.ui.registry.addMenuItem(bgButtonName, {
-            icon: 'highlight-bg-color',
-            text: menuItemBgcolor,
-            onAction: () => handleAction(editor, 'bgcolor'),
-        });
-        editor.ui.registry.addButton(fgButtonName, {
-            icon: 'text-color',
-            tooltip: menuItemFgcolor,
-            onAction: () => handleAction(editor, 'fgcolor'),
-        });
-        editor.ui.registry.addButton(bgButtonName, {
-            icon: 'highlight-bg-color',
-            tooltip: menuItemBgcolor,
-            onAction: () => handleAction(editor, 'bgcolor'),
-        });
+
+        editor.options.set('color_map_background', color_map_backcolor);
+        register$c(editor);
+
     };
 };

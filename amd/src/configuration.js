@@ -21,20 +21,16 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-import {
-    fgButtonName,
-    bgButtonName
-} from './common';
 import {addMenubarItem, addToolbarButtons} from 'editor_tiny/utils';
 
 const configureToolbar = (toolbar) => {
-    toolbar = addToolbarButtons(toolbar, 'formatting', [fgButtonName, bgButtonName]);
+    toolbar = addToolbarButtons(toolbar, 'formatting', ['bfh_forecolor', 'bfh_backcolor']);
     return toolbar;
 };
 
 const configureMenu = (menu) => {
-    menu = addMenubarItem(menu, 'format', fgButtonName);
-    menu = addMenubarItem(menu, 'format', bgButtonName);
+    menu = addMenubarItem(menu, 'format', 'bfh_forecolor');
+    menu = addMenubarItem(menu, 'format', 'bfh_backcolor');
     return menu;
 };
 
