@@ -20,14 +20,28 @@
  * @package     tiny_bfhfontcolor
  * @category    string
  * @copyright   2023 Luca Bösch <luca.boesch@bfh.ch>
+ * @copyright   2023 Stephan Robotta <stephan.robotta@bfh.ch>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['pluginname'] = 'BFH Font color';
-$string['menuItemBgcolor'] = 'Text background color';
-$string['menuItemFgcolor'] = 'Text foreground color';
+$string['enabled'] = 'enabled';
+$string['disabled'] = 'disabled';
 $string['btnBgcolor'] = 'Text background color';
 $string['btnFgcolor'] = 'Text foreground color';
+$string['menuItemBgcolor'] = 'Text background color';
+$string['menuItemFgcolor'] = 'Text foreground color';
+$string['pluginname'] = 'BFH Font color';
 $string['privacy:metadata'] = 'BFH Font colour does not store any personal data';
+$string['settings'] = 'Tiny text color/text background color settings';
+$string['tinytextcolorpicker'] = 'Color picker for text color';
+$string['tinytextcolorpicker_desc'] = 'Should a color picker for text color be available';
+$string['tinytextbackgroundcolorpicker'] = 'Color picker for text background color';
+$string['tinytextbackgroundcolorpicker_desc'] = 'Should a color picker for text background color be available';
+$string['tinytextbackgroundcolors'] = 'Available text background colors';
+$string['tinytextbackgroundcolors_desc'] = 'A comma separated list of alternately RGB color code and text string, e.g. "#000000,Black,#ffffff,White". The values become the text background colors to choose from.';
+$string['tinytextcolors'] = 'Available text colors';
+$string['tinytextcolors_desc'] = 'A comma separated list of alternately RGB color code and text string, e.g. "#000000,Black,#ffffff,White". The values become the text colors to choose from.';
+$string['tinyplaceholdercolorname'] = 'Descriptive name of color';
+$string['tinyplaceholdercolorvalue'] = 'Hex code of color value';
