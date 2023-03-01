@@ -54,7 +54,6 @@ export const getSetup = async() => {
     return (editor) => {
         editor.options.set('custom_colors', false);
         editor.options.set('color_map', color_map);
-        //const colorProcessor = editor.options.get();
         editor.options.register('color_map_background', {
             processor: value => {
                 if (isArrayOf(value, isString)) {
