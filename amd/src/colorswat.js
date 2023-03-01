@@ -240,7 +240,7 @@ const rgbaColour = (red, green, blue, alpha) => ({
   alpha
 });
 
-let global$4 = tinymce.util.Tools.resolve('tinymce.util.LocalStorage');
+let global$4 = window.tinymce.util.Tools.resolve('tinymce.util.LocalStorage');
 
 const map$2 = (xs, f) => {
   const len = xs.length;
