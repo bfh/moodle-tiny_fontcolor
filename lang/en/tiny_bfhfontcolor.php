@@ -45,3 +45,5 @@ $string['tinytextcolors'] = 'Available text colors';
 $string['tinytextcolors_desc'] = 'A list of color names on the left and their RGB color code, e.g. "#000000". The values are the colors displayed in the dialogue to choose from. The names serve as as the tooltip when hovering over the colors.';
 $string['tinyplaceholdercolorname'] = 'Descriptive name of color';
 $string['tinyplaceholdercolorvalue'] = 'Hex code of color value';
+
+

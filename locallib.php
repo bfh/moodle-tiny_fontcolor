@@ -34,3 +34,4 @@ define('TINYTEXTBACKGROUNDCOLORPICKER_DISABLED', 0);
 
 /** User participation in course is suspended (used in user_enrolments->status) */
 define('TINYTEXTBACKGROUNDCOLORPICKER_ENABLED', 1);
+

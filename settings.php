@@ -64,3 +64,4 @@ if ($ADMIN->fulltree) {
         $options);
     $settings->add($setting);
 }
+
