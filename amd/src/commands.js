@@ -21,23 +21,7 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-import {get_string as getString} from 'core/str';
-import {
-    fgButtonName,
-    bgButtonName,
-    component,
-} from './common';
-
-/**
- * Handle the action for your plugin.
- * @param {TinyMCE.editor} editor The tinyMCE editor instance.
- * @param {string} texttype whether fg or bg color change to apply
- */
-const handleAction = (editor, texttype) => {
-    // TODO Handle the action.
-    window.console.log(editor);
-    window.console.log(texttype);
-};
+import {register$c} from "./colorswat";
 
 /**
  * Get the setup function for the buttons.
@@ -48,34 +32,8 @@ const handleAction = (editor, texttype) => {
  * @returns {function} The registration function to call within the Plugin.add function.
  */
 export const getSetup = async() => {
-    const [
-        menuItemFgcolor,
-        menuItemBgcolor,
-    ] = await Promise.all([
-        getString('menuItemFgcolor', component),
-        getString('menuItemBgcolor', component),
-    ]);
 
     return (editor) => {
-        editor.ui.registry.addMenuItem(fgButtonName, {
-            icon: 'text-color',
-            text: menuItemFgcolor,
-            onAction: () => handleAction(editor, 'fgcolor'),
-        });
-        editor.ui.registry.addMenuItem(bgButtonName, {
-            icon: 'highlight-bg-color',
-            text: menuItemBgcolor,
-            onAction: () => handleAction(editor, 'bgcolor'),
-        });
-        editor.ui.registry.addButton(fgButtonName, {
-            icon: 'text-color',
-            tooltip: menuItemFgcolor,
-            onAction: () => handleAction(editor, 'fgcolor'),
-        });
-        editor.ui.registry.addButton(bgButtonName, {
-            icon: 'highlight-bg-color',
-            tooltip: menuItemBgcolor,
-            onAction: () => handleAction(editor, 'bgcolor'),
-        });
+        register$c(editor);
     };
 };
