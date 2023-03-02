@@ -52,7 +52,7 @@ export const register = (editor) => {
         };
       }
     },
-    default: [],
+    "default": [],
   });
 
   editor.options.register(backcolorMap, {
@@ -69,7 +69,7 @@ export const register = (editor) => {
         };
       }
     },
-    default: [],
+    "default": [],
   });
 
   editor.options.register(forecolorPicker, {
