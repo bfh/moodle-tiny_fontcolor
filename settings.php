@@ -33,35 +33,42 @@ $ADMIN->add('editortiny', new admin_category('tiny_bfhfontcolor', new lang_strin
 
 $settings = new admin_settingpage('tiny_bfhfontcolor_settings', new lang_string('settings', 'tiny_bfhfontcolor'));
 if ($ADMIN->fulltree) {
-    $name = new lang_string('tinytextcolors', 'tiny_bfhfontcolor');
-    $desc = new lang_string('tinytextcolors_desc', 'tiny_bfhfontcolor');
-    $default = '';
-    $setting = new admin_setting_colorlist('tiny_bfhfontcolor/tinytextcolors',
-        $name,
-        $desc,
-        $default);
+    $setting = new admin_setting_colorlist(
+        'tiny_bfhfontcolor/tinytextcolors',
+        new lang_string('tinytextcolors', 'tiny_bfhfontcolor'),
+        new lang_string('tinytextcolors_desc', 'tiny_bfhfontcolor'),
+        ''
+    );
     $settings->add($setting);
-    $name = new lang_string('tinytextbackgroundcolors', 'tiny_bfhfontcolor');
-    $desc = new lang_string('tinytextbackgroundcolors_desc', 'tiny_bfhfontcolor');
-    $default = '';
-    $setting = new admin_setting_colorlist('tiny_bfhfontcolor/tinytextbackgroundcolors',
-        $name,
-        $desc,
-        $default);
+
+    $setting = new admin_setting_colorlist(
+        'tiny_bfhfontcolor/tinytextbackgroundcolors',
+        new lang_string('tinytextbackgroundcolors', 'tiny_bfhfontcolor'),
+        new lang_string('tinytextbackgroundcolors_desc', 'tiny_bfhfontcolor'),
+        ''
+    );
     $settings->add($setting);
-    $options = array(TINYTEXTCOLORPICKER_ENABLED  => get_string('enabled', 'tiny_bfhfontcolor'),
-        TINYTEXTCOLORPICKER_DISABLED => get_string('disabled', 'tiny_bfhfontcolor'));
-    $setting = new admin_setting_configselect('tinytextcolorpicker/tiny_bfhfontcolor',
+
+    $offon = [
+        0 => get_string('disabled', 'tiny_bfhfontcolor'),
+        1 => get_string('enabled', 'tiny_bfhfontcolor'),
+    ];
+    $setting = new admin_setting_configselect(
+        'tiny_bfhfontcolor/tinytextcolorpicker',
         new lang_string('tinytextcolorpicker', 'tiny_bfhfontcolor'),
-        new lang_string('tinytextcolorpicker_desc', 'tiny_bfhfontcolor'), GRADE_REPORT_AGGREGATION_POSITION_LAST,
-        $options);
+        new lang_string('tinytextcolorpicker_desc', 'tiny_bfhfontcolor'),
+        0,
+        $offon
+    );
     $settings->add($setting);
-    $options = array(TINYTEXTBACKGROUNDCOLORPICKER_ENABLED  => get_string('enabled', 'tiny_bfhfontcolor'),
-        TINYTEXTBACKGROUNDCOLORPICKER_DISABLED => get_string('disabled', 'tiny_bfhfontcolor'));
-    $setting = new admin_setting_configselect('tinytextbackgroundcolorpicker/tiny_bfhfontcolor',
+
+    $setting = new admin_setting_configselect(
+        'tiny_bfhfontcolor/tinytextbackgroundcolorpicker',
         new lang_string('tinytextbackgroundcolorpicker', 'tiny_bfhfontcolor'),
-        new lang_string('tinytextbackgroundcolorpicker_desc', 'tiny_bfhfontcolor'), GRADE_REPORT_AGGREGATION_POSITION_LAST,
-        $options);
+        new lang_string('tinytextbackgroundcolorpicker_desc', 'tiny_bfhfontcolor'),
+        0,
+        $offon
+    );
     $settings->add($setting);
 }
 

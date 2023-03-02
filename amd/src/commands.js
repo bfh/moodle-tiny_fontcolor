@@ -21,8 +21,7 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-import {register$c, isArrayOf, isString, mapColors} from "./colorswat";
-
+import {register$c} from "./colorswat";
 
 /**
  * Get the setup function for the buttons.
@@ -33,46 +32,8 @@ import {register$c, isArrayOf, isString, mapColors} from "./colorswat";
  * @returns {function} The registration function to call within the Plugin.add function.
  */
 export const getSetup = async() => {
-    const color_map = [
-        '000000', 'Black',
-        '808080', 'Gray',
-        'FFFFFF', 'White',
-        'FF0000', 'Red',
-        'FFFF00', 'Yellow',
-        '008000', 'Green',
-        '0000FF', 'Blue'
-    ];
-
-    const color_map_backcolor = [
-        '000000', 'Black',
-        '808080', 'Gray',
-        'FFFFFF', 'White',
-        '008000', 'Green',
-        '0000FF', 'Blue'
-    ];
 
     return (editor) => {
-        editor.options.set('custom_colors', false);
-        editor.options.set('color_map', color_map);
-        editor.options.register('color_map_background', {
-            processor: value => {
-                if (isArrayOf(value, isString)) {
-                    return {
-                        value: mapColors(value),
-                        valid: true
-                    };
-                } else {
-                    return {
-                        valid: false,
-                        message: 'Must be an array of strings.'
-                    };
-                }
-            },
-            default: color_map_backcolor,
-        });
-
-        editor.options.set('color_map_background', color_map_backcolor);
         register$c(editor);
-
     };
 };

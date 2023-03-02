@@ -1,3 +1,5 @@
+import {getBackcolorMap, getForecolorMap, isBackcolorPickerOn, isForecolorPickerOn} from "./options";
+
 const hasProto = (v, constructor, predicate) => {
   if (predicate(v, constructor.prototype)) {
     return true;
@@ -315,9 +317,9 @@ const option$1 = name => editor => editor.options.get(name);
 const getColorCols$1 = option$1('color_cols');
 const getColors$3 = (editor, name) => {
   if (name === 'bfh_forecolor') {
-    return editor.options.get('color_map');
+    return getForecolorMap(editor);
   }
-  return editor.options.get('color_map_background');
+  return getBackcolorMap(editor);
 };
 const getCurrentColors = (type) => map$2(type === 'bfh_forecolor' ? colorCache.state() : colorCacheBg.state(), color => ({
   type: 'choiceitem',
@@ -408,10 +410,18 @@ const setIconColor = (splitButtonApi, name, newColor) => {
   splitButtonApi.setIconFill(id, newColor);
 };
 const registerTextColorButton = (editor, name, format, tooltip, lastColor) => {
+  let iconName, hasCustom;
+  if (name === 'bfh_forecolor') {
+    iconName = 'text-color';
+    hasCustom = isForecolorPickerOn(editor);
+  } else {
+    iconName = 'highlight-bg-color';
+    hasCustom = isBackcolorPickerOn(editor);
+  }
   editor.ui.registry.addSplitButton(name, {
     tooltip,
     presets: 'color',
-    icon: name === 'bfh_forecolor' ? 'text-color' : 'highlight-bg-color',
+    icon: iconName,
     select: value => {
       const optCurrentRgb = getCurrentColor(editor, format);
       return optCurrentRgb.bind(currentRgb => fromString(currentRgb).map(rgba => {
@@ -420,7 +430,7 @@ const registerTextColorButton = (editor, name, format, tooltip, lastColor) => {
       })).getOr(false);
     },
     columns: getColorCols$1(editor),
-    fetch: getFetch$1(getColors$3(editor, name), false, name),
+    fetch: getFetch$1(getColors$3(editor, name), hasCustom, name),
     onAction: () => {
       applyColor(editor, format, lastColor.get(), noop);
     },
@@ -455,7 +465,7 @@ const registerTextColorMenuItem = (editor, name, format, text) => {
       type: 'fancymenuitem',
       fancytype: 'colorswatch',
       initData: {
-        allowCustomColors: false,
+        allowCustomColors: name === 'bfh_forecolor' ? isForecolorPickerOn(editor) : isBackcolorPickerOn(editor),
         colors: getColors$3(editor, name),
       },
       onAction: data => {
@@ -519,13 +529,21 @@ const colorPickerDialog = editor => (callback, value) => {
   });
 };
 const register$c = editor => {
+  if (!isForecolorPickerOn(editor) && !isBackcolorPickerOn(editor)
+    && getForecolorMap(editor).length === 0 && getBackcolorMap(editor).length === 0) {
+    return;
+  }
   registerCommands(editor);
-  const lastForeColor = Cell(fallbackColor);
-  const lastBackColor = Cell(fallbackColor);
-  registerTextColorButton(editor, 'bfh_forecolor', 'forecolor', 'Text color', lastForeColor);
-  registerTextColorButton(editor, 'bfh_backcolor', 'hilitecolor', 'Background color', lastBackColor);
-  registerTextColorMenuItem(editor, 'bfh_forecolor', 'forecolor', 'Text color');
-  registerTextColorMenuItem(editor, 'bfh_backcolor', 'hilitecolor', 'Background color');
+  if (isForecolorPickerOn(editor) || getForecolorMap(editor).length > 0) {
+    const lastForeColor = Cell(fallbackColor);
+    registerTextColorButton(editor, 'bfh_forecolor', 'forecolor', 'Text color', lastForeColor);
+    registerTextColorMenuItem(editor, 'bfh_forecolor', 'forecolor', 'Text color');
+  }
+  if (isBackcolorPickerOn(editor) || getBackcolorMap(editor).length > 0) {
+    const lastBackColor = Cell(fallbackColor);
+    registerTextColorButton(editor, 'bfh_backcolor', 'hilitecolor', 'Background color', lastBackColor);
+    registerTextColorMenuItem(editor, 'bfh_backcolor', 'hilitecolor', 'Background color');
+  }
 };
 
 export {
