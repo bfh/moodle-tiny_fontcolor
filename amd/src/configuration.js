@@ -22,15 +22,16 @@
  */
 
 import {addMenubarItem, addToolbarButtons} from 'editor_tiny/utils';
+import {forecolor, backcolor} from './common'
 
 const configureToolbar = (toolbar) => {
-    toolbar = addToolbarButtons(toolbar, 'formatting', ['bfh_forecolor', 'bfh_backcolor']);
+    toolbar = addToolbarButtons(toolbar, 'formatting', [forecolor, backcolor]);
     return toolbar;
 };
 
 const configureMenu = (menu) => {
-    menu = addMenubarItem(menu, 'format', 'bfh_forecolor');
-    menu = addMenubarItem(menu, 'format', 'bfh_backcolor');
+    menu = addMenubarItem(menu, 'format', forecolor);
+    menu = addMenubarItem(menu, 'format', backcolor);
     return menu;
 };
 

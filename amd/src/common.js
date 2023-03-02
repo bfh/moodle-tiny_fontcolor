@@ -24,4 +24,6 @@
 export default {
     pluginName: 'tiny_bfhfontcolor/plugin',
     component: 'tiny_bfhfontcolor',
+    forecolor: 'bfh_forecolor',
+    backcolor: 'bfh_backcolor',
 };
