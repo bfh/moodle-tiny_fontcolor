@@ -1,3 +1,29 @@
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Color palette setter for BFH Fontcolor plugin.
+ *
+ * @module      tiny_equation/options
+ * @copyright   2023 Luca Bösch <luca.boesch@bfh.ch>
+ * @copyright   2023 Stephan Robotta <stephan.robotta@bfh.ch>
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+// ESLint directives.
+
 import {getBackcolorMap, getForecolorMap, isBackcolorPickerOn, isForecolorPickerOn} from "./options";
 
 const hasProto = (v, constructor, predicate) => {
@@ -43,7 +69,9 @@ const indexOf = (xs, x) => {
   const r = rawIndexOf(xs, x);
   return r === -1 ? Optional.none() : Optional.some(r);
 };
-const noop = () => {};
+const noop = () => {
+  // Do nothing.
+};
 
 class Optional {
   constructor(tag, value) {
@@ -242,7 +270,8 @@ const rgbaColour = (red, green, blue, alpha) => ({
   alpha
 });
 
-let global$4 = window.tinymce.util.Tools.resolve('tinymce.util.LocalStorage');
+// eslint-disable-next-line
+let global$4 = tinymce.util.Tools.resolve('tinymce.util.LocalStorage');
 
 const map$2 = (xs, f) => {
   const len = xs.length;
@@ -299,7 +328,9 @@ const ColorCache = (max = 10, suffix = '') => {
   };
 };
 
+// eslint-disable-next-line
 const colorCache = ColorCache(10);
+// eslint-disable-next-line
 const colorCacheBg = ColorCache(10, '-background');
 const mapColors = colorMap => {
   const colors = [];
@@ -535,11 +566,13 @@ const register$c = editor => {
   }
   registerCommands(editor);
   if (isForecolorPickerOn(editor) || getForecolorMap(editor).length > 0) {
+    // eslint-disable-next-line
     const lastForeColor = Cell(fallbackColor);
     registerTextColorButton(editor, 'bfh_forecolor', 'forecolor', 'Text color', lastForeColor);
     registerTextColorMenuItem(editor, 'bfh_forecolor', 'forecolor', 'Text color');
   }
   if (isBackcolorPickerOn(editor) || getBackcolorMap(editor).length > 0) {
+    // eslint-disable-next-line
     const lastBackColor = Cell(fallbackColor);
     registerTextColorButton(editor, 'bfh_backcolor', 'hilitecolor', 'Background color', lastBackColor);
     registerTextColorMenuItem(editor, 'bfh_backcolor', 'hilitecolor', 'Background color');
