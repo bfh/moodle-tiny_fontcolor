@@ -86,7 +86,7 @@ class plugininfo extends plugin implements plugin_with_menuitems, plugin_with_bu
                 $value = trim($item['value']);
                 if (!empty($name) && !empty($value) && preg_match('/^#?[0-9a-f]$/', $value) !== false) {
                     $array[] = $value;
-                    $array[] = $name;
+                    $array[] = format_string($name, true, ['context' => $context]);
                 }
             }
             $config[$configfield] = $array;
