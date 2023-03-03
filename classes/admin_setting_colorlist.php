@@ -117,12 +117,11 @@ class admin_setting_colorlist extends admin_setting {
      * Data must be validated.
      * @return bool
      */
-    public function validate(): bool
-    {
+    public function validate(): bool {
         $this->get_setting_val_from_request();
         $isvalid = true;
         foreach (\array_keys($this->settingval) as $i) {
-            if (!plugininfo::validateColorCode($this->settingval[$i]['value'])) {
+            if (!plugininfo::validatecolorcode($this->settingval[$i]['value'])) {
                 $this->settingval[$i]['value_error'] = true;
                 $isvalid = false;
             }
@@ -140,8 +139,7 @@ class admin_setting_colorlist extends admin_setting {
      *
      * @return array
      */
-    protected function get_setting_val_from_request(): array
-    {
+    protected function get_setting_val_from_request(): array {
         if ($this->settingval === null) {
             $this->settingval = [];
             $names = [];
@@ -168,10 +166,11 @@ class admin_setting_colorlist extends admin_setting {
     }
 
     /**
+     * Reads out a setting
+     *
      * @return false|mixed|string|null
      */
-    public function get_setting()
-    {
+    public function get_setting() {
         if ($this->settingval !== null) {
             return json_encode($this->settingval);
         }
@@ -179,13 +178,14 @@ class admin_setting_colorlist extends admin_setting {
     }
 
     /**
-     * @param $data
+     * Writes in a setting
+     *
+     * @param array $data The data to write
      * @return bool|\lang_string|string
      * @throws \coding_exception
      */
-    public function write_setting($data)
-    {
-        // $data is ignored here, it must be fetched from the request
+    public function write_setting($data) {
+        // The content of $data is ignored here, it must be fetched from the request.
         $data = $this->get_setting_val_from_request();
         if ($this->validate() !== true) {
             return false;
