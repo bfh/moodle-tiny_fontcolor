@@ -16,7 +16,7 @@
 /**
  * Options helper for BFH Fontcolor plugin.
  *
- * @module      tiny_equation/options
+ * @module      tiny_bfhfontcolor/options
  * @copyright   2023 Luca Bösch <luca.boesch@bfh.ch>
  * @copyright   2023 Stephan Robotta <stephan.robotta@bfh.ch>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -88,27 +88,27 @@ export const register = (editor) => {
  * Get the defined colors for the text color.
  *
  * @param {TinyMCE} editor
- * @returns {object}
+ * @returns {array}
  */
 export const getForecolorMap = (editor) => editor.options.get(forecolorMap);
 /**
- * Get the defined colors for the background color
+ * Get the defined colors for the background color.
  *
  * @param {TinyMCE} editor
- * @returns {boolean}
+ * @returns {array}
  */
 export const getBackcolorMap = (editor) => editor.options.get(backcolorMap);
 /**
  * Get whether the color picker for the text color is enabled.
  *
  * @param {TinyMCE} editor
- * @returns {number}
+ * @returns {boolean}
  */
 export const isForecolorPickerOn = (editor) => editor.options.get(forecolorPicker);
 /**
  * Get whether the color picker for the background color is enabled.
  *
  * @param {TinyMCE} editor
- * @returns {string}
+ * @returns {boolean}
  */
 export const isBackcolorPickerOn = (editor) => editor.options.get(backcolorPicker);

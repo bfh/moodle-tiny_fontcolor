@@ -25,18 +25,29 @@
 
 namespace tiny_bfhfontcolor;
 
-use admin_setting_configtext;
-use core\uuid;
+use admin_setting;
 
 /**
- * BFH Font colour plugin color config utility.
+ * BFH Font color plugin color config utility.
  *
  * @package     tiny_bfhfontcolor
  * @copyright   2023 Luca Bösch <luca.boesch@bfh.ch>
  * @copyright   2023 Stephan Robotta <stephan.robotta@bfh.ch>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class admin_setting_colorlist extends admin_setting_configtext {
+class admin_setting_colorlist extends admin_setting {
+
+    /**
+     * Placeholder that is used as a value for the value of the original settings hidden input field.
+     * @var string
+     */
+    private const PLACEHOLDER_ORIG_VALUE = '~~1~~+';
+
+    /**
+     * Store here the data that where extracted from the post request when saving.
+     * @var array
+     */
+    private $settingval;
 
     /**
      * Return an XHTML string for the setting
@@ -48,10 +59,22 @@ class admin_setting_colorlist extends admin_setting_configtext {
     public function output_html($data, $query='') {
         global $OUTPUT;
 
-        $colors = json_decode($data, true);
-        if (!is_array($colors)) {
-            $colors = [];
+        // The original object is destroyed, so we don't have information about the error. However, if
+        // we identify the value being sent from the current post, then just fetch the original data again
+        // from the request, validate it to know which field exactly caused the trouble being not valid.
+        if ($data === static::PLACEHOLDER_ORIG_VALUE) {
+            $this->get_setting_val_from_request();
+            $this->validate($data);
+            $colors = $this->settingval;
+        } else {
+            // Assume here that we got a json from the config out of the DB.
+            $colors = json_decode($data, true);
+            if (!is_array($colors)) {
+                $colors = [];
+            }
         }
+
+        // Add an empty value to have a black input line below the already defined colors.
         $colors[] = [
             'name' => '',
             'value' => '',
@@ -65,9 +88,9 @@ class admin_setting_colorlist extends admin_setting_configtext {
             ],
             'id' => $this->get_id(),
             'name' => $this->get_full_name(),
+            'value' => static::PLACEHOLDER_ORIG_VALUE,
             'forceltr' => $this->get_force_ltr(),
             'readonly' => $this->is_readonly(),
-            'size' => $this->size,
             'colors' => [],
         ];
 
@@ -79,6 +102,7 @@ class admin_setting_colorlist extends admin_setting_configtext {
                     'id' => $this->get_id() . $suffix,
                     'name' => $this->get_full_name() . $suffix,
                     'value' => $colors[$i][$field] ?? '',
+                    'invalid' => $colors[$i][$field . '_error'] ?? false,
                     'last' => $i + 1 === count($colors),
                 ];
             }
@@ -90,33 +114,82 @@ class admin_setting_colorlist extends admin_setting_configtext {
     }
 
     /**
-     * Write the config setting.
-     * Here we need to translate the rows of color names and values into a single json.
-     * @param string $name
-     * @param string $value
+     * Data must be validated.
      * @return bool
      */
-    public function config_write($name, $value) {
-        $colors = [];
-        $names = [];
-        $values = [];
-        foreach ($_REQUEST as $key => $val) {
-            if (str_contains($key, $name . '_name_') !== false) {
-                $num = (int)substr($key, strrpos($key, '_') + 1);
-                $names[$num] = trim($val);
-            } else if (str_contains($key, $name . '_value_') !== false) {
-                $num = (int)substr($key, strrpos($key, '_') + 1);
-                $values[$num] = trim($val);
+    public function validate(): bool
+    {
+        $this->get_setting_val_from_request();
+        $isvalid = true;
+        foreach (\array_keys($this->settingval) as $i) {
+            if (!plugininfo::validateColorCode($this->settingval[$i]['value'])) {
+                $this->settingval[$i]['value_error'] = true;
+                $isvalid = false;
+            }
+            if (empty($this->settingval[$i]['name'])) {
+                $this->settingval[$i]['name_error'] = true;
+                $isvalid = false;
             }
         }
-        foreach (\array_keys($names) as $i) {
-            if (isset($values[$i]) && !empty($names[$i]) && !empty($values[$i])) {
-                $colors[] = [
+        return $isvalid;
+    }
+
+    /**
+     * Get complex settings value (that is later converted into a json) from the
+     * POST params (i.e. from the single input fields of color name and value).
+     *
+     * @return array
+     */
+    protected function get_setting_val_from_request(): array
+    {
+        if ($this->settingval === null) {
+            $this->settingval = [];
+            $names = [];
+            $values = [];
+            foreach ($_REQUEST as $key => $val) {
+                if (str_contains($key, $this->name . '_name_') !== false) {
+                    $names[$key] = trim($val);
+                } else if (str_contains($key, $this->name . '_value_') !== false) {
+                    $values[$key] = trim($val);
+                }
+            }
+            foreach (\array_keys($names) as $i) {
+                $j = str_replace('_name_', '_value_', $i);
+                if (empty($names[$i]) && empty($values[$j])) {
+                    continue;
+                }
+                $this->settingval[] = [
                     'name' => $names[$i],
-                    'value' => $values[$i],
+                    'value' => $values[$j],
                 ];
             }
         }
-        return parent::config_write($name, json_encode($colors));
+        return $this->settingval;
+    }
+
+    /**
+     * @return false|mixed|string|null
+     */
+    public function get_setting()
+    {
+        if ($this->settingval !== null) {
+            return json_encode($this->settingval);
+        }
+        return $this->config_read($this->name);
+    }
+
+    /**
+     * @param $data
+     * @return bool|\lang_string|string
+     * @throws \coding_exception
+     */
+    public function write_setting($data)
+    {
+        // $data is ignored here, it must be fetched from the request
+        $data = $this->get_setting_val_from_request();
+        if ($this->validate() !== true) {
+            return false;
+        }
+        return ($this->config_write($this->name, json_encode($data)) ? '' : get_string('errorsetting', 'admin'));
     }
 }

@@ -15,8 +15,15 @@
 
 /**
  * Color palette setter for BFH Fontcolor plugin.
+ * This code is mostly reused from the TinyMCE silver theme. However, this
+ * code is enhanced to have two different color maps for background and
+ * text color. Also, the option to enable or disable custom colors
+ * via a colorpicker can be set independently on both text- and
+ * background color. If the colorpicker is disabled and the color
+ * map is empty for one of the text- or background color, the menu entry as
+ * well as the toolbar button will not appear in the editor.
  *
- * @module      tiny_equation/options
+ * @module      tiny_bfhfontcolor/colorswat
  * @copyright   2023 Luca Bösch <luca.boesch@bfh.ch>
  * @copyright   2023 Stephan Robotta <stephan.robotta@bfh.ch>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later

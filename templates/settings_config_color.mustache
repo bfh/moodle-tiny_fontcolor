@@ -93,23 +93,41 @@
         {{header.value}}
     </div>
 </div>
-<input name="{{name}}" type="hidden" value="1" />
+<input name="{{name}}" type="hidden" value="{{value}}" />
 
+<div class="{{name}}">
 {{#colors}}
-    <div class="row">
+    <div class="row color-row">
         <div class="form-text defaultsnext col-sm-11 col-md-5">
-            <input type="text" name="{{name.name}}" value="{{name.value}}" size="{{size}}" id="{{name.id}}"
-                   class="form-control {{#forceltr}}text-ltr{{/forceltr}}" {{#readonly}}disabled{{/readonly}}>
+            <input type="text" name="{{name.name}}" value="{{name.value}}" id="{{name.id}}"
+                   class="form-control {{#forceltr}}text-ltr{{/forceltr}}{{#name.invalid}} is-invalid{{/name.invalid}}" {{#readonly}}disabled{{/readonly}}>
         </div>
         <div class="form-text defaultsnext col-sm-11 col-md-5">
-            <input type="text" name="{{value.name}}" value="{{value.value}}" size="{{size}}" id="{{value.id}}"
-                   class="form-control {{#forceltr}}text-ltr{{/forceltr}}" {{#readonly}}disabled{{/readonly}}>
+            <input type="text" name="{{value.name}}" value="{{value.value}}" id="{{value.id}}"
+                   class="form-control {{#forceltr}}text-ltr{{/forceltr}}{{#value.invalid}} is-invalid{{/value.invalid}}" {{#readonly}}disabled{{/readonly}}>
         </div>
         {{#name.last}}
             <div class="form-text defaultsnext col-sm-1 col-md-2">
-                <button class="btn btn-primary">+</button>
+                <button class="btn btn-primary add" style="width: 2.3rem;">+</button>
+            </div>
+        {{/name.last}}
+        {{^name.last}}
+            <div class="form-text defaultsnext col-sm-1 col-md-2">
+                <button class="btn btn-primary del" style="width: 2.3rem;">-</button>
             </div>
         {{/name.last}}
     </div>
 {{/colors}}
+</div>
 
+{{#js}}
+require(
+[
+    'tiny_bfhfontcolor/color-settings',
+],
+function(
+    ColorSettings
+) {
+    ColorSettings.init('{{name}}');
+});
+{{/js}}
