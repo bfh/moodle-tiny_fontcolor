@@ -3,9 +3,9 @@ const insertRow = element => {
   const currRow = element.parentNode.parentNode;
   const newRow = currRow.cloneNode(true);
   const parts = newRow.querySelector('input').getAttribute('name').split('_');
-  const num = parseInt(parts[parts.length -1]);
+  const num = parseInt(parts[parts.length - 1]);
   const newNum = num + 1;
-  const re = new RegExp('_' + num.toString() +'$');
+  const re = new RegExp('_' + num.toString() + '$');
   newRow.querySelectorAll('input').forEach(input => {
     ['name', 'id', 'value'].forEach((attr) => {
       if (attr === 'value') {
