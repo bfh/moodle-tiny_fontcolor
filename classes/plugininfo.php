@@ -68,8 +68,7 @@ class plugininfo extends plugin implements plugin_with_menuitems, plugin_with_bu
      * @param string $code
      * @return bool
      */
-    public static function validateColorCode(string $code): bool
-    {
+    public static function validatecolorcode(string $code): bool {
         return (bool)preg_match('/^#?[0-9a-f]{6}$/i', $code);
     }
 
@@ -96,7 +95,7 @@ class plugininfo extends plugin implements plugin_with_menuitems, plugin_with_bu
             foreach ($data as $item) {
                 $name = trim($item['name']);
                 $value = trim($item['value']);
-                if (!empty($name) && static::validateColorCode($value)) {
+                if (!empty($name) && static::validatecolorcode($value)) {
                     $array[] = $value;
                     $array[] = format_string($name, true, ['context' => $context]);
                 }
