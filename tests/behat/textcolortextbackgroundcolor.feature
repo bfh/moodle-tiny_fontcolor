@@ -5,7 +5,7 @@ Feature: Tiny editor text color/text background color
   @javascript
   Scenario: Set a text color using the Text foreground color menu item
     Given the following config values are set as admin:
-      | ttinytextbackgroundcolors | [{"name":"Black","value":"000000"},{"name":"White","value":"ffffff"},{"name":"Yellow","value":"e2b007"},{"name":"rosa","value":"#ffccc0"}] | tiny_bfhfontcolor |
+      | tinytextbackgroundcolors | [{"name":"Black","value":"000000"},{"name":"White","value":"ffffff"},{"name":"Yellow","value":"e2b007"},{"name":"rosa","value":"#ffccc0"}] | tiny_bfhfontcolor |
       | tinytextcolors | [{"name":"Normal","value":"#000000"},{"name":"Gray dark","value":"#ff000a"},{"name":"gray","value":"#ffccba"},{"name":"test1","value":"#fce34f"}] | tiny_bfhfontcolor |
     And I log in as "admin"
     And I open my profile in edit mode
@@ -19,7 +19,7 @@ Feature: Tiny editor text color/text background color
   @javascript
   Scenario: Set a text background color using the Text background color menu item
     Given the following config values are set as admin:
-      | ttinytextbackgroundcolors | [{"name":"Black","value":"000000"},{"name":"White","value":"ffffff"},{"name":"Yellow","value":"e2b007"},{"name":"rosa","value":"#ffccc0"}] | tiny_bfhfontcolor |
+      | tinytextbackgroundcolors | [{"name":"Black","value":"000000"},{"name":"White","value":"ffffff"},{"name":"Yellow","value":"e2b007"},{"name":"rosa","value":"#ffccc0"}] | tiny_bfhfontcolor |
       | tinytextcolors | [{"name":"Normal","value":"#000000"},{"name":"Gray dark","value":"#ff000a"},{"name":"gray","value":"#ffccba"},{"name":"test1","value":"#fce34f"}] | tiny_bfhfontcolor |
     And I log in as "admin"
     And I open my profile in edit mode
@@ -33,7 +33,7 @@ Feature: Tiny editor text color/text background color
   @javascript
   Scenario: Set a text color using the Text foreground color menu button
     Given the following config values are set as admin:
-      | ttinytextbackgroundcolors | [{"name":"Black","value":"000000"},{"name":"White","value":"ffffff"},{"name":"Yellow","value":"e2b007"},{"name":"rosa","value":"#ffccc0"}] | tiny_bfhfontcolor |
+      | tinytextbackgroundcolors | [{"name":"Black","value":"000000"},{"name":"White","value":"ffffff"},{"name":"Yellow","value":"e2b007"},{"name":"rosa","value":"#ffccc0"}] | tiny_bfhfontcolor |
       | tinytextcolors | [{"name":"Normal","value":"#000000"},{"name":"Gray dark","value":"#ff000a"},{"name":"gray","value":"#ffccba"},{"name":"test1","value":"#fce34f"}] | tiny_bfhfontcolor |
     And I log in as "admin"
     And I open my profile in edit mode
@@ -47,7 +47,7 @@ Feature: Tiny editor text color/text background color
   @javascript
   Scenario: Set a text background color using the Text background color menu button
     Given the following config values are set as admin:
-      | ttinytextbackgroundcolors | [{"name":"Black","value":"000000"},{"name":"White","value":"ffffff"},{"name":"Yellow","value":"e2b007"},{"name":"rosa","value":"#ffccc0"}] | tiny_bfhfontcolor |
+      | tinytextbackgroundcolors | [{"name":"Black","value":"000000"},{"name":"White","value":"ffffff"},{"name":"Yellow","value":"e2b007"},{"name":"rosa","value":"#ffccc0"}] | tiny_bfhfontcolor |
       | tinytextcolors | [{"name":"Normal","value":"#000000"},{"name":"Gray dark","value":"#ff000a"},{"name":"gray","value":"#ffccba"},{"name":"test1","value":"#fce34f"}] | tiny_bfhfontcolor |
     And I log in as "admin"
     And I open my profile in edit mode
