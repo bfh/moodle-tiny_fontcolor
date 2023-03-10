@@ -16,7 +16,7 @@
 /**
  * Commands helper for the Moodle tiny_bfhfontcolor plugin.
  *
- * @module      tiny_bfhfontcolor/commands
+ * @module      tiny_bfhfontcolor
  * @copyright   2023 Luca Bösch <luca.boesch@bfh.ch>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
