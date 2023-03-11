@@ -16,7 +16,7 @@
 /**
  * Options helper for BFH Fontcolor plugin.
  *
- * @module      tiny_bfhfontcolor/options
+ * @module      tiny_bfhfontcolor
  * @copyright   2023 Luca Bösch <luca.boesch@bfh.ch>
  * @copyright   2023 Stephan Robotta <stephan.robotta@bfh.ch>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -24,7 +24,7 @@
 
 import {getPluginOptionName} from 'editor_tiny/options';
 import {pluginName} from './common';
-import {isArrayOf, isString, mapColors} from "./colorswat";
+import {isArrayOf, isString, mapColors} from "./polyfill";
 
 const forecolorMap = getPluginOptionName(pluginName, 'tinytextcolors');
 const backcolorMap = getPluginOptionName(pluginName, 'tinytextbackgroundcolors');

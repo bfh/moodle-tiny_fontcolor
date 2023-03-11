@@ -18,7 +18,7 @@
  * two input fields for color name and color hex value. This is suited for and
  * works with the template settings_config_color.mustache only.
  *
- * @module      tiny_bfhfontcolor/color-settings
+ * @module      tiny_bfhfontcolor
  * @copyright   2023 Luca Bösch <luca.boesch@bfh.ch>
  * @copyright   2023 Stephan Robotta <stephan.robotta@bfh.ch>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
