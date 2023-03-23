@@ -11,3 +11,7 @@ CI](https://github.com/lucaboesch/moodle-tiny_bfhfontcolor/workflows/Moodle%20Pl
 # To Install it manually #
 
 - Unzip the plugin in the Moodle .../lib/editor/tiny/bfhfontcolor/ directory.
+- As a Moodle Admin go to Site Administration -> Plugins -> Text Editors -> TinyMCE editor -> Tiny text color/text background color settings
+and add a view color names and color codes for at least on of the setting "Available text colors" or "Available text background colors".
+You may also enable the color picker for text color or background color. If no colors are available and the color picker is disabled the
+menu item and button in the TinyMCE editor are not available.
