@@ -83,8 +83,8 @@ class admin_setting_colorlist extends admin_setting {
         $default = $this->get_defaultsetting();
         $context = (object) [
             'header' => [
-                'name' => get_string('tinyplaceholdercolorname', 'tiny_bfhfontcolor'),
-                'value' => get_string('tinyplaceholdercolorvalue', 'tiny_bfhfontcolor'),
+                'name' => get_string('placeholdercolorname', 'tiny_bfhfontcolor'),
+                'value' => get_string('placeholdercolorvalue', 'tiny_bfhfontcolor'),
             ],
             'id' => $this->get_id(),
             'name' => $this->get_full_name(),

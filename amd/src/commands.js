@@ -22,6 +22,8 @@
  */
 
 import {register$c} from "./colorswat";
+import {component} from './common';
+import {get_strings as getStrings} from 'core/str';
 
 /**
  * Get the setup function for the buttons.
@@ -32,8 +34,24 @@ import {register$c} from "./colorswat";
  * @returns {function} The registration function to call within the Plugin.add function.
  */
 export const getSetup = async() => {
+    const [
+        btnFgColor,
+        menuItemFgcolor,
+        btnBgcolor,
+        menuItemBgcolor,
+    ] = getStrings([
+        'btnFgcolor',
+        'menuItemFgcolor',
+        'btnBgcolor',
+        'menuItemBgcolor'
+    ].map((key) => ({key, component})));
 
     return (editor) => {
-        register$c(editor);
+        register$c(editor, {
+            'btnFgColor': btnFgColor,
+            'menuItemFgcolor': menuItemFgcolor,
+            'btnBgcolor': btnBgcolor,
+            'menuItemBgcolor': menuItemBgcolor,
+        });
     };
 };

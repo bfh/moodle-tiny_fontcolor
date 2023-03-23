@@ -26,10 +26,10 @@ import {getPluginOptionName} from 'editor_tiny/options';
 import {pluginName} from './common';
 import {isArrayOf, isString, mapColors} from "./polyfill";
 
-const forecolorMap = getPluginOptionName(pluginName, 'tinytextcolors');
-const backcolorMap = getPluginOptionName(pluginName, 'tinytextbackgroundcolors');
-const forecolorPicker = getPluginOptionName(pluginName, 'tinytextcolorpicker');
-const backcolorPicker = getPluginOptionName(pluginName, 'tinytextbackgroundcolorpicker');
+const forecolorMap = getPluginOptionName(pluginName, 'textcolors');
+const backcolorMap = getPluginOptionName(pluginName, 'backgroundcolors');
+const forecolorPicker = getPluginOptionName(pluginName, 'textcolorpicker');
+const backcolorPicker = getPluginOptionName(pluginName, 'backgroundcolorpicker');
 
 /**
  * Register the options for the Tiny Equation plugin.

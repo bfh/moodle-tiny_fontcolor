@@ -86,7 +86,7 @@ class plugininfo extends plugin implements plugin_with_menuitems, plugin_with_bu
                                                                 ?editor $editor = null): array {
 
         $config = [];
-        foreach (['tinytextcolors', 'tinytextbackgroundcolors'] as $configfield) {
+        foreach (['textcolors', 'backgroundcolors'] as $configfield) {
             $data = json_decode(get_config('tiny_bfhfontcolor', $configfield), true);
             if (!\is_array($data)) {
                 $data = [];
@@ -103,8 +103,8 @@ class plugininfo extends plugin implements plugin_with_menuitems, plugin_with_bu
             $config[$configfield] = $array;
         }
 
-        $config['tinytextcolorpicker'] = (bool)get_config('tiny_bfhfontcolor', 'tinytextcolorpicker');
-        $config['tinytextbackgroundcolorpicker'] = (bool)get_config('tiny_bfhfontcolor', 'tinytextbackgroundcolorpicker');
+        $config['textcolorpicker'] = (bool)get_config('tiny_bfhfontcolor', 'textcolorpicker');
+        $config['backgroundcolorpicker'] = (bool)get_config('tiny_bfhfontcolor', 'backgroundcolorpicker');
 
         return $config;
     }

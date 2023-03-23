@@ -312,7 +312,7 @@ const colorPickerDialog = editor => (callback, value) => {
     }
   });
 };
-const register$c = editor => {
+const register$c = (editor, labels) => {
   if (!isForecolorPickerOn(editor) && !isBackcolorPickerOn(editor)
     && getForecolorMap(editor).length === 0 && getBackcolorMap(editor).length === 0) {
     return;
@@ -321,18 +321,17 @@ const register$c = editor => {
   if (isForecolorPickerOn(editor) || getForecolorMap(editor).length > 0) {
     // eslint-disable-next-line
     const lastForeColor = Cell(fallbackColor);
-    registerTextColorButton(editor, 'bfh_forecolor', 'forecolor', 'Text color', lastForeColor);
-    registerTextColorMenuItem(editor, 'bfh_forecolor', 'forecolor', 'Text color');
+    registerTextColorButton(editor, 'bfh_forecolor', 'forecolor', labels.btnFgColor, lastForeColor);
+    registerTextColorMenuItem(editor, 'bfh_forecolor', 'forecolor', labels.menuItemFgcolor);
   }
   if (isBackcolorPickerOn(editor) || getBackcolorMap(editor).length > 0) {
     // eslint-disable-next-line
     const lastBackColor = Cell(fallbackColor);
-    registerTextColorButton(editor, 'bfh_backcolor', 'hilitecolor', 'Background color', lastBackColor);
-    registerTextColorMenuItem(editor, 'bfh_backcolor', 'hilitecolor', 'Background color');
+    registerTextColorButton(editor, 'bfh_backcolor', 'hilitecolor', labels.btnBgcolor, lastBackColor);
+    registerTextColorMenuItem(editor, 'bfh_backcolor', 'hilitecolor', labels.menuItemBgcolor);
   }
 };
 
 export {
-  registerTextColorButton,
   register$c
 };

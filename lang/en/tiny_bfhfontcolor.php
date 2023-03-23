@@ -35,15 +35,15 @@ $string['menuItemFgcolor'] = 'Text foreground color';
 $string['pluginname'] = 'BFH Font color';
 $string['privacy:metadata'] = 'BFH Font color does not store any personal data';
 $string['settings'] = 'Tiny text color/text background color settings';
-$string['tinytextcolorpicker'] = 'Color picker for text color';
-$string['tinytextcolorpicker_desc'] = 'Should a color picker for text color be available';
-$string['tinytextbackgroundcolorpicker'] = 'Color picker for text background color';
-$string['tinytextbackgroundcolorpicker_desc'] = 'Should a color picker for text background color be available';
-$string['tinytextbackgroundcolors'] = 'Available text background colors';
-$string['tinytextbackgroundcolors_desc'] = 'A list of color names on the left and their RGB color code, e.g. "#000000". The values are the colors displayed in the dialogue to choose from. The names serve as as the tooltip when hovering over the colors.';
-$string['tinytextcolors'] = 'Available text colors';
-$string['tinytextcolors_desc'] = 'A list of color names on the left and their RGB color code, e.g. "#000000". The values are the colors displayed in the dialogue to choose from. The names serve as as the tooltip when hovering over the colors.';
-$string['tinyplaceholdercolorname'] = 'Descriptive name of color';
-$string['tinyplaceholdercolorvalue'] = 'Hex code of color value';
+$string['textcolorpicker'] = 'Color picker for text color';
+$string['textcolorpicker_desc'] = 'Should a color picker for text color be available';
+$string['backgroundcolorpicker'] = 'Color picker for text background color';
+$string['backgroundcolorpicker_desc'] = 'Should a color picker for text background color be available';
+$string['backgroundcolors'] = 'Available text background colors';
+$string['backgroundcolors_desc'] = 'A list of color names on the left and their RGB color code, e.g. "#000000". The values are the colors displayed in the dialogue to choose from. The names serve as as the tooltip when hovering over the colors.';
+$string['textcolors'] = 'Available text colors';
+$string['textcolors_desc'] = 'A list of color names on the left and their RGB color code, e.g. "#000000". The values are the colors displayed in the dialogue to choose from. The names serve as as the tooltip when hovering over the colors.';
+$string['placeholdercolorname'] = 'Descriptive name of color';
+$string['placeholdercolorvalue'] = 'Hex code of color value';
 
 

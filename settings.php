@@ -32,17 +32,17 @@ $ADMIN->add('editortiny', new admin_category('tiny_bfhfontcolor', new lang_strin
 $settings = new admin_settingpage('tiny_bfhfontcolor_settings', new lang_string('settings', 'tiny_bfhfontcolor'));
 if ($ADMIN->fulltree) {
     $setting = new admin_setting_colorlist(
-        'tiny_bfhfontcolor/tinytextcolors',
-        new lang_string('tinytextcolors', 'tiny_bfhfontcolor'),
-        new lang_string('tinytextcolors_desc', 'tiny_bfhfontcolor'),
+        'tiny_bfhfontcolor/textcolors',
+        new lang_string('textcolors', 'tiny_bfhfontcolor'),
+        new lang_string('textcolors_desc', 'tiny_bfhfontcolor'),
         ''
     );
     $settings->add($setting);
 
     $setting = new admin_setting_colorlist(
-        'tiny_bfhfontcolor/tinytextbackgroundcolors',
-        new lang_string('tinytextbackgroundcolors', 'tiny_bfhfontcolor'),
-        new lang_string('tinytextbackgroundcolors_desc', 'tiny_bfhfontcolor'),
+        'tiny_bfhfontcolor/backgroundcolors',
+        new lang_string('backgroundcolors', 'tiny_bfhfontcolor'),
+        new lang_string('backgroundcolors_desc', 'tiny_bfhfontcolor'),
         ''
     );
     $settings->add($setting);
@@ -52,18 +52,18 @@ if ($ADMIN->fulltree) {
         1 => get_string('enabled', 'tiny_bfhfontcolor'),
     ];
     $setting = new admin_setting_configselect(
-        'tiny_bfhfontcolor/tinytextcolorpicker',
-        new lang_string('tinytextcolorpicker', 'tiny_bfhfontcolor'),
-        new lang_string('tinytextcolorpicker_desc', 'tiny_bfhfontcolor'),
+        'tiny_bfhfontcolor/textcolorpicker',
+        new lang_string('textcolorpicker', 'tiny_bfhfontcolor'),
+        new lang_string('textcolorpicker_desc', 'tiny_bfhfontcolor'),
         0,
         $offon
     );
     $settings->add($setting);
 
     $setting = new admin_setting_configselect(
-        'tiny_bfhfontcolor/tinytextbackgroundcolorpicker',
-        new lang_string('tinytextbackgroundcolorpicker', 'tiny_bfhfontcolor'),
-        new lang_string('tinytextbackgroundcolorpicker_desc', 'tiny_bfhfontcolor'),
+        'tiny_bfhfontcolor/backgroundcolorpicker',
+        new lang_string('backgroundcolorpicker', 'tiny_bfhfontcolor'),
+        new lang_string('backgroundcolorpicker_desc', 'tiny_bfhfontcolor'),
         0,
         $offon
     );
