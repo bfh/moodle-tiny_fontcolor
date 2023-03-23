@@ -39,7 +39,7 @@ export const getSetup = async() => {
         menuItemFgcolor,
         btnBgcolor,
         menuItemBgcolor,
-    ] = getStrings([
+    ] = await getStrings([
         'btnFgcolor',
         'menuItemFgcolor',
         'btnBgcolor',
