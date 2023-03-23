@@ -25,8 +25,6 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-require_once(__DIR__ . '/locallib.php');
-
 use \tiny_bfhfontcolor\admin_setting_colorlist;
 
 $ADMIN->add('editortiny', new admin_category('tiny_bfhfontcolor', new lang_string('pluginname', 'tiny_bfhfontcolor')));
