@@ -17,15 +17,15 @@
 /**
  * Plugin version and other meta-data are defined here.
  *
- * @package     tiny_bfhfontcolor
+ * @package     tiny_fontcolor
  * @copyright   2023 Luca Bösch <luca.boesch@bfh.ch>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'tiny_bfhfontcolor';
-$plugin->release = '0.1.0';
-$plugin->version = 2023022000;
+$plugin->component = 'tiny_fontcolor';
+$plugin->release = '0.2.0';
+$plugin->version = 2023040400;
 $plugin->requires = 2022112800;
 $plugin->maturity = MATURITY_ALPHA;

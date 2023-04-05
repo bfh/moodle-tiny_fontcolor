@@ -14,7 +14,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Color palette setter for BFH Fontcolor plugin.
+ * Color palette setter for Tiny Font Color plugin.
  * This code is mostly reused from the TinyMCE silver theme. However, this
  * code is enhanced to have two different color maps for background and
  * text color. Also, the option to enable or disable custom colors
@@ -23,7 +23,7 @@
  * map is empty for one of the text- or background color, the menu entry as
  * well as the toolbar button will not appear in the editor.
  *
- * @module      tiny_bfhfontcolor
+ * @module      tiny_fontcolor
  * @copyright   2023 Luca Bösch <luca.boesch@bfh.ch>
  * @copyright   2023 Stephan Robotta <stephan.robotta@bfh.ch>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -33,6 +33,8 @@
 
 import * as pf from './polyfill';
 import {getBackcolorMap, getForecolorMap, isBackcolorPickerOn, isForecolorPickerOn} from './options';
+import {forecolor, backcolor} from './common';
+import {isNullable} from "./polyfill";
 
 let global$4 = localStorage;
 
@@ -45,6 +47,28 @@ const map$2 = (xs, f) => {
   }
   return r;
 };
+
+const Label = () => {
+  let labels;
+  const register = txt => {
+    labels = txt;
+  };
+  const get = (name, ...args) => {
+    let val = !isNullable(labels[name]) ? labels[name] : name;
+    if (!isNullable(args)) {
+      for (let x = 0; x < args.length; x++) {
+        val = val.replace('{' + x + '}', args[x]);
+      }
+    }
+    return val;
+  };
+  return {
+    get,
+    register,
+  };
+};
+// eslint-disable-next-line
+const labels = Label();
 
 const Cell = initial => {
   let value = initial;
@@ -100,12 +124,12 @@ const option$1 = name => editor => editor.options.get(name);
 
 const getColorCols$1 = option$1('color_cols');
 const getColors$3 = (editor, name) => {
-  if (name === 'bfh_forecolor') {
+  if (name === forecolor) {
     return getForecolorMap(editor);
   }
   return getBackcolorMap(editor);
 };
-const getCurrentColors = (type) => map$2(type === 'bfh_forecolor' ? colorCache.state() : colorCacheBg.state(), color => ({
+const getCurrentColors = (type) => map$2(type === forecolor ? colorCache.state() : colorCacheBg.state(), color => ({
   type: 'choiceitem',
   text: color,
   value: color
@@ -119,7 +143,7 @@ const hasStyleApi = node => pf.isNonNullable(node.style);
 const getCurrentColor = (editor, format) => {
   let color;
   editor.dom.getParents(editor.selection.getStart(), elm => {
-    const value = hasStyleApi(elm) ? elm.style[format === 'bfh_forecolor' ? 'color' : 'backgroundColor'] : null;
+    const value = hasStyleApi(elm) ? elm.style[format === forecolor ? 'color' : 'backgroundColor'] : null;
     if (value) {
       color = color ? color : value;
     }
@@ -140,6 +164,9 @@ const removeFormat = (editor, format) => {
     editor.nodeChanged();
   });
 };
+const registerLabels = txt => {
+    labels.register(txt);
+};
 const registerCommands = editor => {
   editor.addCommand('mceApplyTextcolor', (format, value) => {
     applyFormat(editor, format, value);
@@ -152,13 +179,13 @@ const getAdditionalColors = hasCustom => {
   const type = 'choiceitem';
   const remove = {
     type,
-    text: 'Remove color',
+    text: labels.get('removeColor'),
     icon: 'color-swatch-remove-color',
     value: 'remove'
   };
   const custom = {
     type,
-    text: 'Custom color',
+    text: labels.get('customColor'),
     icon: 'color-picker',
     value: 'custom'
   };
@@ -190,12 +217,12 @@ const getFetch$1 = (colors, hasCustom, type) => callback => {
   callback(getColors$1(colors, hasCustom, type));
 };
 const setIconColor = (splitButtonApi, name, newColor) => {
-  const id = name === 'bfh_forecolor' ? 'tox-icon-text-color__color' : 'tox-icon-highlight-bg-color__color';
+  const id = name === forecolor ? 'tox-icon-text-color__color' : 'tox-icon-highlight-bg-color__color';
   splitButtonApi.setIconFill(id, newColor);
 };
 const registerTextColorButton = (editor, name, format, tooltip, lastColor) => {
   let iconName, hasCustom;
-  if (name === 'bfh_forecolor') {
+  if (name === forecolor) {
     iconName = 'text-color';
     hasCustom = isForecolorPickerOn(editor);
   } else {
@@ -244,12 +271,12 @@ const registerTextColorButton = (editor, name, format, tooltip, lastColor) => {
 const registerTextColorMenuItem = (editor, name, format, text) => {
   editor.ui.registry.addNestedMenuItem(name, {
     text,
-    icon: name === 'bfh_forecolor' ? 'text-color' : 'highlight-bg-color',
+    icon: name === forecolor ? 'text-color' : 'highlight-bg-color',
     getSubmenuItems: () => [{
       type: 'fancymenuitem',
       fancytype: 'colorswatch',
       initData: {
-        allowCustomColors: name === 'bfh_forecolor' ? isForecolorPickerOn(editor) : isBackcolorPickerOn(editor),
+        allowCustomColors: name === forecolor ? isForecolorPickerOn(editor) : isBackcolorPickerOn(editor),
         colors: getColors$3(editor, name),
       },
       onAction: data => {
@@ -267,10 +294,7 @@ const colorPickerDialog = editor => (callback, value) => {
       callback(pf.Optional.from(hex));
       api.close();
     } else {
-      editor.windowManager.alert(editor.translate([
-        'Invalid hex color code: {0}',
-        hex
-      ]));
+      editor.windowManager.alert(labels.get('colorPickerErrHexCode', hex));
     }
   };
   const onAction = (_api, details) => {
@@ -280,26 +304,26 @@ const colorPickerDialog = editor => (callback, value) => {
   };
   const initialData = {colorpicker: value};
   editor.windowManager.open({
-    title: 'Color Picker',
+    title: labels.get('colorPickerTitle'),
     size: 'normal',
     body: {
       type: 'panel',
       items: [{
         type: 'colorpicker',
         name: 'colorpicker',
-        label: 'Color'
+        label: labels.get('colorPickerColor'),
       }]
     },
     buttons: [
       {
         type: 'cancel',
         name: 'cancel',
-        text: 'Cancel'
+        text: labels.get('colorPickerCancel'),
       },
       {
         type: 'submit',
         name: 'save',
-        text: 'Save',
+        text: labels.get('colorPickerSave'),
         primary: true
       }
     ],
@@ -312,26 +336,27 @@ const colorPickerDialog = editor => (callback, value) => {
     }
   });
 };
-const register$c = (editor, labels) => {
+const register$c = (editor, txt) => {
   if (!isForecolorPickerOn(editor) && !isBackcolorPickerOn(editor)
     && getForecolorMap(editor).length === 0 && getBackcolorMap(editor).length === 0) {
     return;
   }
+  registerLabels(txt);
   registerCommands(editor);
   if (isForecolorPickerOn(editor) || getForecolorMap(editor).length > 0) {
     // eslint-disable-next-line
     const lastForeColor = Cell(fallbackColor);
-    registerTextColorButton(editor, 'bfh_forecolor', 'forecolor', labels.btnFgColor, lastForeColor);
-    registerTextColorMenuItem(editor, 'bfh_forecolor', 'forecolor', labels.menuItemFgcolor);
+    registerTextColorButton(editor, forecolor, 'forecolor', labels.get('btnFgColor'), lastForeColor);
+    registerTextColorMenuItem(editor, forecolor, 'forecolor', labels.get('menuItemFgcolor'));
   }
   if (isBackcolorPickerOn(editor) || getBackcolorMap(editor).length > 0) {
     // eslint-disable-next-line
     const lastBackColor = Cell(fallbackColor);
-    registerTextColorButton(editor, 'bfh_backcolor', 'hilitecolor', labels.btnBgcolor, lastBackColor);
-    registerTextColorMenuItem(editor, 'bfh_backcolor', 'hilitecolor', labels.menuItemBgcolor);
+    registerTextColorButton(editor, backcolor, 'hilitecolor', labels.get('btnBgcolor'), lastBackColor);
+    registerTextColorMenuItem(editor, backcolor, 'hilitecolor', labels.get('menuItemBgcolor'));
   }
 };
 
 export {
-  register$c
+  register$c,
 };

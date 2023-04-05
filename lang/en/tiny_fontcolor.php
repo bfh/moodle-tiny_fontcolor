@@ -17,7 +17,7 @@
 /**
  * Plugin strings are defined here.
  *
- * @package     tiny_bfhfontcolor
+ * @package     tiny_fontcolor
  * @category    string
  * @copyright   2023 Luca Bösch <luca.boesch@bfh.ch>
  * @copyright   2023 Stephan Robotta <stephan.robotta@bfh.ch>
@@ -26,14 +26,19 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['enabled'] = 'enabled';
-$string['disabled'] = 'disabled';
 $string['btnBgcolor'] = 'Text background color';
 $string['btnFgcolor'] = 'Text foreground color';
 $string['menuItemBgcolor'] = 'Text background color';
 $string['menuItemFgcolor'] = 'Text foreground color';
-$string['pluginname'] = 'BFH Font color';
-$string['privacy:metadata'] = 'BFH Font color does not store any personal data';
+$string['customColor'] = 'Custom color';
+$string['removeColor'] = 'Remove color';
+$string['colorPickerTitle'] = 'Color Picker';
+$string['colorPickerColor'] = 'Color';
+$string['colorPickerSave'] = 'Apply';
+$string['colorPickerCancel'] = 'Cancel';
+$string['colorPickerErrHexCode'] = 'Invalid hex color code: {0}';
+$string['pluginname'] = 'Tiny Font Color';
+$string['privacy:metadata'] = 'Tiny Font Color does not store any personal data';
 $string['settings'] = 'Tiny text color/text background color settings';
 $string['textcolorpicker'] = 'Color picker for text color';
 $string['textcolorpicker_desc'] = 'Should a color picker for text color be available';

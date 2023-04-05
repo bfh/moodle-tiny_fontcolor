@@ -14,16 +14,16 @@
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * Common values helper for the Moodle tiny_bfhfontcolor plugin.
+ * Common values helper for the Moodle tiny_fontcolor plugin.
  *
- * @module      tiny_bfhfontcolor
+ * @module      tiny_fontcolor
  * @copyright   2023 Luca Bösch <luca.boesch@bfh.ch>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 export default {
-    pluginName: 'tiny_bfhfontcolor/plugin',
-    component: 'tiny_bfhfontcolor',
-    forecolor: 'bfh_forecolor',
-    backcolor: 'bfh_backcolor',
+    pluginName: 'tiny_fontcolor/plugin',
+    component: 'tiny_fontcolor',
+    forecolor: 'tiny_forecolor',
+    backcolor: 'tiny_backcolor',
 };

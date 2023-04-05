@@ -15,22 +15,22 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Class that allow configuring a bfhfontcolor color list.
+ * Class that allow configuring a fontcolor color list.
  *
- * @package     tiny_bfhfontcolor
+ * @package     tiny_fontcolor
  * @copyright   2023 Luca Bösch <luca.boesch@bfh.ch>
  * @copyright   2023 Stephan Robotta <stephan.robotta@bfh.ch>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace tiny_bfhfontcolor;
+namespace tiny_fontcolor;
 
 use admin_setting;
 
 /**
- * BFH Font color plugin color config utility.
+ * Tiny Font color plugin config utility.
  *
- * @package     tiny_bfhfontcolor
+ * @package     tiny_fontcolor
  * @copyright   2023 Luca Bösch <luca.boesch@bfh.ch>
  * @copyright   2023 Stephan Robotta <stephan.robotta@bfh.ch>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -83,8 +83,8 @@ class admin_setting_colorlist extends admin_setting {
         $default = $this->get_defaultsetting();
         $context = (object) [
             'header' => [
-                'name' => get_string('placeholdercolorname', 'tiny_bfhfontcolor'),
-                'value' => get_string('placeholdercolorvalue', 'tiny_bfhfontcolor'),
+                'name' => get_string('placeholdercolorname', 'tiny_fontcolor'),
+                'value' => get_string('placeholdercolorvalue', 'tiny_fontcolor'),
             ],
             'id' => $this->get_id(),
             'name' => $this->get_full_name(),
@@ -108,7 +108,7 @@ class admin_setting_colorlist extends admin_setting {
             }
             $context->colors[] = $row;
         }
-        $html = $OUTPUT->render_from_template('tiny_bfhfontcolor/settings_config_color', $context);
+        $html = $OUTPUT->render_from_template('tiny_fontcolor/settings_config_color', $context);
 
         return format_admin_setting($this, $this->visiblename, $html, $this->description, true, '', $default, $query);
     }

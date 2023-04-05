@@ -17,7 +17,7 @@
  * Helper functions that come from the theme.js of the TinyMCE and that are
  * heavily used by the colorswat.js.
  *
- * @module      tiny_bfhfontcolor
+ * @module      tiny_fontcolor
  * @copyright   2023 Luca Bösch <luca.boesch@bfh.ch>
  * @copyright   2023 Stephan Robotta <stephan.robotta@bfh.ch>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later

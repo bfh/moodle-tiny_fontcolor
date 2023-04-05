@@ -14,9 +14,9 @@
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * Tiny tiny_bfhfontcolor for Moodle.
+ * Tiny tiny_fontcolor for Moodle.
  *
- * @module      tiny_bfhfontcolor
+ * @module      tiny_fontcolor
  * @copyright   2023 Luca Bösch <luca.boesch@bfh.ch>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

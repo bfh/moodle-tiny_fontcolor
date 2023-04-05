@@ -17,7 +17,7 @@
 /**
  * Plugin strings are defined here.
  *
- * @package     tiny_bfhfontcolor
+ * @package     tiny_fontcolor
  * @category    string
  * @copyright   2023 Luca Bösch <luca.boesch@bfh.ch>
  * @copyright   2023 Stephan Robotta <stephan.robotta@bfh.ch>
@@ -26,14 +26,19 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['enabled'] = 'ein';
-$string['disabled'] = 'aus';
-$string['btnBgcolor'] = 'Textfarbe';
-$string['btnFgcolor'] = 'Hintergrundfarbe';
-$string['menuItemBgcolor'] = 'Textfarbe';
-$string['menuItemFgcolor'] = 'Hintergrundfarbe';
-$string['pluginname'] = 'BFH Font color';
-$string['privacy:metadata'] = 'BFH Font color speichert keine personenbezogenen Daten.';
+$string['btnBgcolor'] = 'Hintergrundfarbe';
+$string['btnFgcolor'] = 'Textfarbe';
+$string['menuItemBgcolor'] = 'Hintergrundfarbe';
+$string['menuItemFgcolor'] = 'Textfarbe';
+$string['customColor'] = 'andere Farbe';
+$string['removeColor'] = 'Farbe entfernen';
+$string['colorPickerTitle'] = 'Farbauswahl';
+$string['colorPickerColor'] = 'Farbe';
+$string['colorPickerSave'] = 'Anwenden';
+$string['colorPickerCancel'] = 'Abbrechen';
+$string['colorPickerErrHexCode'] = 'Der Farbcode (Hexadezimal) {0} ist ungültig.';
+$string['pluginname'] = 'Tiny Font Color';
+$string['privacy:metadata'] = 'Tiny Font Color speichert keine personenbezogenen Daten.';
 $string['settings'] = 'Text- und Hintergrundfarbe anpassen';
 $string['textcolorpicker'] = 'Farbpalette für Textfarbe';
 $string['textcolorpicker_desc'] = 'Soll eine Palette zum frei wählen der Textfarbe angezeigt werden';

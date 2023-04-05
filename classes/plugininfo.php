@@ -15,14 +15,14 @@
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * Tiny BFH Font colour plugin for Moodle.
+ * Tiny Font Color plugin for Moodle.
  *
- * @package     tiny_bfhfontcolor
+ * @package     tiny_fontcolor
  * @copyright   2023 Luca Bösch <luca.boesch@bfh.ch>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace tiny_bfhfontcolor;
+namespace tiny_fontcolor;
 
 use context;
 use editor_tiny\editor;
@@ -34,7 +34,7 @@ use editor_tiny\plugin_with_configuration;
 /**
  * BFH Font colour plugin.
  *
- * @package     tiny_bfhfontcolor
+ * @package     tiny_fontcolor
  * @copyright   2023 Luca Bösch <luca.boesch@bfh.ch>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -47,8 +47,8 @@ class plugininfo extends plugin implements plugin_with_menuitems, plugin_with_bu
      */
     public static function get_available_menuitems(): array {
         return [
-            'tiny_bfhfontcolor/bfh_forecolor',
-            'tiny_bfhfontcolor/bfh_backcolor',
+            'tiny_fontcolor/forecolor',
+            'tiny_fontcolor/backcolor',
         ];
     }
 
@@ -58,8 +58,8 @@ class plugininfo extends plugin implements plugin_with_menuitems, plugin_with_bu
      */
     public static function get_available_buttons(): array {
         return [
-            'tiny_bfhfontcolor/bfh_forecolor',
-            'tiny_bfhfontcolor/bfh_backcolor',
+            'tiny_fontcolor/forecolor',
+            'tiny_fontcolor/backcolor',
         ];
     }
 
@@ -87,7 +87,7 @@ class plugininfo extends plugin implements plugin_with_menuitems, plugin_with_bu
 
         $config = [];
         foreach (['textcolors', 'backgroundcolors'] as $configfield) {
-            $data = json_decode(get_config('tiny_bfhfontcolor', $configfield), true);
+            $data = json_decode(get_config('tiny_fontcolor', $configfield), true);
             if (!\is_array($data)) {
                 $data = [];
             }
@@ -103,8 +103,8 @@ class plugininfo extends plugin implements plugin_with_menuitems, plugin_with_bu
             $config[$configfield] = $array;
         }
 
-        $config['textcolorpicker'] = (bool)get_config('tiny_bfhfontcolor', 'textcolorpicker');
-        $config['backgroundcolorpicker'] = (bool)get_config('tiny_bfhfontcolor', 'backgroundcolorpicker');
+        $config['textcolorpicker'] = (bool)get_config('tiny_fontcolor', 'textcolorpicker');
+        $config['backgroundcolorpicker'] = (bool)get_config('tiny_fontcolor', 'backgroundcolorpicker');
 
         return $config;
     }

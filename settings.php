@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Settings that allow configuring various bfhfontcolor features.
+ * Settings that allow configuring various tiny Fon Color plugin features.
  *
- * @package     tiny_bfhfontcolor
+ * @package     tiny_fontcolor
  * @copyright   2023 Luca Bösch <luca.boesch@bfh.ch>
  * @copyright   2023 Stephan Robotta <stephan.robotta@bfh.ch>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -25,45 +25,45 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-use \tiny_bfhfontcolor\admin_setting_colorlist;
+use \tiny_fontcolor\admin_setting_colorlist;
 
-$ADMIN->add('editortiny', new admin_category('tiny_bfhfontcolor', new lang_string('pluginname', 'tiny_bfhfontcolor')));
+$ADMIN->add('editortiny', new admin_category('tiny_fontcolor', new lang_string('pluginname', 'tiny_fontcolor')));
 
-$settings = new admin_settingpage('tiny_bfhfontcolor_settings', new lang_string('settings', 'tiny_bfhfontcolor'));
+$settings = new admin_settingpage('tiny_fontcolor_settings', new lang_string('settings', 'tiny_fontcolor'));
 if ($ADMIN->fulltree) {
     $setting = new admin_setting_colorlist(
-        'tiny_bfhfontcolor/textcolors',
-        new lang_string('textcolors', 'tiny_bfhfontcolor'),
-        new lang_string('textcolors_desc', 'tiny_bfhfontcolor'),
+        'tiny_fontcolor/textcolors',
+        new lang_string('textcolors', 'tiny_fontcolor'),
+        new lang_string('textcolors_desc', 'tiny_fontcolor'),
         ''
     );
     $settings->add($setting);
 
     $setting = new admin_setting_colorlist(
-        'tiny_bfhfontcolor/backgroundcolors',
-        new lang_string('backgroundcolors', 'tiny_bfhfontcolor'),
-        new lang_string('backgroundcolors_desc', 'tiny_bfhfontcolor'),
+        'tiny_fontcolor/backgroundcolors',
+        new lang_string('backgroundcolors', 'tiny_fontcolor'),
+        new lang_string('backgroundcolors_desc', 'tiny_fontcolor'),
         ''
     );
     $settings->add($setting);
 
     $offon = [
-        0 => get_string('disabled', 'tiny_bfhfontcolor'),
-        1 => get_string('enabled', 'tiny_bfhfontcolor'),
+        0 => get_string('disabled', 'core_adminpresets'),
+        1 => get_string('enabled', 'core_adminpresets'),
     ];
     $setting = new admin_setting_configselect(
-        'tiny_bfhfontcolor/textcolorpicker',
-        new lang_string('textcolorpicker', 'tiny_bfhfontcolor'),
-        new lang_string('textcolorpicker_desc', 'tiny_bfhfontcolor'),
+        'tiny_fontcolor/textcolorpicker',
+        new lang_string('textcolorpicker', 'tiny_fontcolor'),
+        new lang_string('textcolorpicker_desc', 'tiny_fontcolor'),
         0,
         $offon
     );
     $settings->add($setting);
 
     $setting = new admin_setting_configselect(
-        'tiny_bfhfontcolor/backgroundcolorpicker',
-        new lang_string('backgroundcolorpicker', 'tiny_bfhfontcolor'),
-        new lang_string('backgroundcolorpicker_desc', 'tiny_bfhfontcolor'),
+        'tiny_fontcolor/backgroundcolorpicker',
+        new lang_string('backgroundcolorpicker', 'tiny_fontcolor'),
+        new lang_string('backgroundcolorpicker_desc', 'tiny_fontcolor'),
         0,
         $offon
     );

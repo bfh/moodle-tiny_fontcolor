@@ -14,9 +14,9 @@
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * Commands helper for the Moodle tiny_bfhfontcolor plugin.
+ * Commands helper for the Moodle tiny_fontcolor plugin.
  *
- * @module      tiny_bfhfontcolor
+ * @module      tiny_fontcolor
  * @copyright   2023 Luca Bösch <luca.boesch@bfh.ch>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -39,19 +39,39 @@ export const getSetup = async() => {
         menuItemFgcolor,
         btnBgcolor,
         menuItemBgcolor,
+        customColor,
+        removeColor,
+        colorPickerTitle,
+        colorPickerColor,
+        colorPickerSave,
+        colorPickerCancel,
+        colorPickerErrHexCode,
     ] = await getStrings([
         'btnFgcolor',
         'menuItemFgcolor',
         'btnBgcolor',
-        'menuItemBgcolor'
+        'menuItemBgcolor',
+        'customColor',
+        'removeColor',
+        'colorPickerTitle',
+        'colorPickerColor',
+        'colorPickerSave',
+        'colorPickerCancel',
+        'colorPickerErrHexCode',
     ].map((key) => ({key, component})));
-
     return (editor) => {
         register$c(editor, {
             'btnFgColor': btnFgColor,
             'menuItemFgcolor': menuItemFgcolor,
             'btnBgcolor': btnBgcolor,
             'menuItemBgcolor': menuItemBgcolor,
+            'customColor': customColor,
+            'removeColor': removeColor,
+            'colorPickerTitle': colorPickerTitle,
+            'colorPickerColor': colorPickerColor,
+            'colorPickerSave': colorPickerSave,
+            'colorPickerCancel': colorPickerCancel,
+            'colorPickerErrHexCode': colorPickerErrHexCode,
         });
     };
 };

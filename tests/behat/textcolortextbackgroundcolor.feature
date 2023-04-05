@@ -1,12 +1,12 @@
-@editor @editor_tiny @tiny @tiny_bfhfontcolor
+@editor @editor_tiny @tiny @tiny_fontcolor
 Feature: Tiny editor text color/text background color
   To format content in Tiny, I need to set text color/text background color.
 
   @javascript
   Scenario: Set a text color using the Text foreground color menu item
     Given the following config values are set as admin:
-      | backgroundcolors | [{"name":"Black","value":"000000"},{"name":"White","value":"ffffff"},{"name":"Yellow","value":"e2b007"},{"name":"rosa","value":"#ffccc0"}] | tiny_bfhfontcolor |
-      | textcolors | [{"name":"Normal","value":"#000000"},{"name":"Gray dark","value":"#ff000a"},{"name":"gray","value":"#ffccba"},{"name":"test1","value":"#fce34f"}] | tiny_bfhfontcolor |
+      | backgroundcolors | [{"name":"Black","value":"000000"},{"name":"White","value":"ffffff"},{"name":"Yellow","value":"e2b007"},{"name":"rosa","value":"#ffccc0"}] | tiny_fontcolor |
+      | textcolors | [{"name":"Normal","value":"#000000"},{"name":"Gray dark","value":"#ff000a"},{"name":"gray","value":"#ffccba"},{"name":"test1","value":"#fce34f"}] | tiny_fontcolor |
     And I log in as "admin"
     And I open my profile in edit mode
     And I wait until the page is ready
@@ -19,8 +19,8 @@ Feature: Tiny editor text color/text background color
   @javascript
   Scenario: Set a text background color using the Text background color menu item
     Given the following config values are set as admin:
-      | backgroundcolors | [{"name":"Black","value":"000000"},{"name":"White","value":"ffffff"},{"name":"Yellow","value":"e2b007"},{"name":"rosa","value":"#ffccc0"}] | tiny_bfhfontcolor |
-      | textcolors | [{"name":"Normal","value":"#000000"},{"name":"Gray dark","value":"#ff000a"},{"name":"gray","value":"#ffccba"},{"name":"test1","value":"#fce34f"}] | tiny_bfhfontcolor |
+      | backgroundcolors | [{"name":"Black","value":"000000"},{"name":"White","value":"ffffff"},{"name":"Yellow","value":"e2b007"},{"name":"rosa","value":"#ffccc0"}] | tiny_fontcolor |
+      | textcolors | [{"name":"Normal","value":"#000000"},{"name":"Gray dark","value":"#ff000a"},{"name":"gray","value":"#ffccba"},{"name":"test1","value":"#fce34f"}] | tiny_fontcolor |
     And I log in as "admin"
     And I open my profile in edit mode
     And I wait until the page is ready
@@ -33,8 +33,8 @@ Feature: Tiny editor text color/text background color
   @javascript
   Scenario: Set a text color using the Text foreground color menu button
     Given the following config values are set as admin:
-      | backgroundcolors | [{"name":"Black","value":"000000"},{"name":"White","value":"ffffff"},{"name":"Yellow","value":"e2b007"},{"name":"rosa","value":"#ffccc0"}] | tiny_bfhfontcolor |
-      | textcolors | [{"name":"Normal","value":"#000000"},{"name":"Gray dark","value":"#ff000a"},{"name":"gray","value":"#ffccba"},{"name":"test1","value":"#fce34f"}] | tiny_bfhfontcolor |
+      | backgroundcolors | [{"name":"Black","value":"000000"},{"name":"White","value":"ffffff"},{"name":"Yellow","value":"e2b007"},{"name":"rosa","value":"#ffccc0"}] | tiny_fontcolor |
+      | textcolors | [{"name":"Normal","value":"#000000"},{"name":"Gray dark","value":"#ff000a"},{"name":"gray","value":"#ffccba"},{"name":"test1","value":"#fce34f"}] | tiny_fontcolor |
     And I log in as "admin"
     And I open my profile in edit mode
     And I wait until the page is ready
@@ -47,8 +47,8 @@ Feature: Tiny editor text color/text background color
   @javascript
   Scenario: Set a text background color using the Text background color menu button
     Given the following config values are set as admin:
-      | backgroundcolors | [{"name":"Black","value":"000000"},{"name":"White","value":"ffffff"},{"name":"Yellow","value":"e2b007"},{"name":"rosa","value":"#ffccc0"}] | tiny_bfhfontcolor |
-      | textcolors | [{"name":"Normal","value":"#000000"},{"name":"Gray dark","value":"#ff000a"},{"name":"gray","value":"#ffccba"},{"name":"test1","value":"#fce34f"}] | tiny_bfhfontcolor |
+      | backgroundcolors | [{"name":"Black","value":"000000"},{"name":"White","value":"ffffff"},{"name":"Yellow","value":"e2b007"},{"name":"rosa","value":"#ffccc0"}] | tiny_fontcolor |
+      | textcolors | [{"name":"Normal","value":"#000000"},{"name":"Gray dark","value":"#ff000a"},{"name":"gray","value":"#ffccba"},{"name":"test1","value":"#fce34f"}] | tiny_fontcolor |
     And I log in as "admin"
     And I open my profile in edit mode
     And I wait until the page is ready
