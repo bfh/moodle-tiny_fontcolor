@@ -6,12 +6,19 @@ CI](https://github.com/bfh/moodle-tiny_fontcolor/workflows/Moodle%20Plugin%20CI/
 [![PHP Support](https://img.shields.io/badge/php-7.4--8.1-blue)](https://github.com/bfh/moodle-tiny_fontcolor/action)
 [![Moodle Support](https://img.shields.io/badge/Moodle-4.1+-orange)](https://github.com/bfh/moodle-tiny_fontcolor/actions)
 [![License GPL-3.0](https://img.shields.io/github/license/bfh/moodle-tiny_fontcolor?color=lightgrey)](https://github.com/bfh/moodle-tiny_fontcolor/blob/main/LICENSE)
-[![GitHub contributors](https://img.shields.io/github/contributors/bfh/moodle-tiny_bfhfontcolor)](https://github.com/bfh/moodle-tiny_fontcolor/graphs/contributors)
+[![GitHub contributors](https://img.shields.io/github/contributors/bfh/moodle-tiny_fontcolor)](https://github.com/bfh/moodle-tiny_fontcolor/graphs/contributors)
 
 # To Install it manually #
 
 - Unzip the plugin in the Moodle .../lib/editor/tiny/fontcolor/ directory.
 - As a Moodle Admin go to Site Administration -> Plugins -> Text Editors -> TinyMCE editor -> Tiny text color/text background color settings
 and add a view color names and color codes for at least on of the setting "Available text colors" or "Available text background colors".
-You may also enable the color picker for text color or background color. If no colors are available and the color picker is disabled the
-menu item and button in the TinyMCE editor are not available.
+- You may also enable the color picker for text color or background color.
+ 
+If no colors are available and the color picker is disabled then the
+menu item and button in the TinyMCE editor will not appear. This is valid for both,
+the text color setting and the background color setting.
+
+The color name can be an arbitrary string e.g. Red or Dark Green or whatever you name
+your color. The name can be also the "corporate name" e.g. that is used in any style guides
+of the corporate identity at your institution.
