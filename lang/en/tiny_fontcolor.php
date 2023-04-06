@@ -51,4 +51,5 @@ $string['textcolors_desc'] = 'A list of color names on the left and their RGB co
 $string['placeholdercolorname'] = 'Descriptive name of color';
 $string['placeholdercolorvalue'] = 'Hex code of color value';
 
-
+// PRIVACY.
+$string['privacy:metadata'] = 'The Tiny font color plugin does not store any personal data about any user.';
