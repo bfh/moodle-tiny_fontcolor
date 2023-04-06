@@ -12,7 +12,7 @@ Feature: Tiny editor text color/text background color
     And I wait until the page is ready
     And I set the field "Description" to "<p>Some plain text</p><p>Some more text</p>"
     And I select the "p" element in position "1" of the "Description" TinyMCE editor
-    And I click on the "Format > Text foreground color" menu item for the "Description" TinyMCE editor
+    And I click on the "Format > Text foreground colour" menu item for the "Description" TinyMCE editor
     And I press "Update profile"
     Then I should see "Some plain text"
 
@@ -26,7 +26,7 @@ Feature: Tiny editor text color/text background color
     And I wait until the page is ready
     And I set the field "Description" to "<p>Some plain text</p><p>Some more text</p>"
     And I select the "p" element in position "1" of the "Description" TinyMCE editor
-    And I click on the "Format > Text background color" menu item for the "Description" TinyMCE editor
+    And I click on the "Format > Text background colour" menu item for the "Description" TinyMCE editor
     And I press "Update profile"
     Then I should see "Some plain text"
 
@@ -40,7 +40,7 @@ Feature: Tiny editor text color/text background color
     And I wait until the page is ready
     And I set the field "Description" to "<p>Some plain text</p><p>Some more text</p>"
     And I select the "p" element in position "1" of the "Description" TinyMCE editor
-    And I click on the "Text foreground color" button for the "Description" TinyMCE editor
+    And I click on the "Text foreground colour" button for the "Description" TinyMCE editor
     And I press "Update profile"
     Then I should see "Some plain text"
 
@@ -54,6 +54,6 @@ Feature: Tiny editor text color/text background color
     And I wait until the page is ready
     And I set the field "Description" to "<p>Some plain text</p><p>Some more text</p>"
     And I select the "p" element in position "1" of the "Description" TinyMCE editor
-    And I click on the "Text background color" button for the "Description" TinyMCE editor
+    And I click on the "Text background colour" button for the "Description" TinyMCE editor
     And I press "Update profile"
     Then I should see "Some plain text"
