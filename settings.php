@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Settings that allow configuring various tiny Fon Color plugin features.
+ * Settings that allow configuring various tiny Font Color plugin features.
  *
  * @package     tiny_fontcolor
  * @copyright   2023 Luca Bösch <luca.boesch@bfh.ch>
