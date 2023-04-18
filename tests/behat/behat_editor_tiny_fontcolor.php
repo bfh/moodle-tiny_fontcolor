@@ -40,24 +40,23 @@ class behat_editor_tiny_fontcolor extends behat_editor_tiny {
      * Click on a button for the specified TinyMCE editor.
      *
      * phpcs:disable
-     * @When /^I click on the "(?P<menuitem_string>(?:[^"]|\\")*)" submenu item for the "(?P<locator_string>(?:[^"]|\\")*)" TinyMCE editor$/
+     * @When /^I click on the color menu item "(?P<label_string>(?:[^"]|\\")*)" and choose "(?P<color_string>(?:[^"]|\\")*)" for the "(?P<locator_string>(?:[^"]|\\")*)" TinyMCE editor$/
      * phpcs:enable
      *
-     * @param string $menuitem The label of the menu item
+     * @param string $label The label of the menu item
+     * @param string $color The color to choose from the menu item
      * @param string $locator The locator for the editor
      */
-    public function i_click_on_submenuitem_in_menu(string $menuitem, string $locator): void {
+    public function i_click_on_colormenuitem_in_menu(string $label, string $color, string $locator): void {
         $this->require_tiny_tags();
         $container = $this->get_editor_container_for_locator($locator);
 
         $menubar = $container->find('css', '[role="menubar"]');
 
-        $menus = array_map(function(string $value): string {
-            return trim($value);
-        }, explode('>', $menuitem));
+        $menus = [trim($label), trim($color)];
 
         // Open the menu bar.
-        $mainmenu = array_shift($menus);
+        $mainmenu = 'Format';
         $this->execute('behat_general::i_click_on_in_the', [$mainmenu, 'button', $menubar, 'NodeElement']);
 
         foreach ($menus as $menuitem) {
@@ -76,34 +75,5 @@ class behat_editor_tiny_fontcolor extends behat_editor_tiny {
             $link = $openmenu->find('css', "[title='{$menuitem}'][role^='menuitem']");
             $this->execute('behat_general::i_click_on', [$link, 'NodeElement']);
         }
-    }
-
-    /**
-     * Select the first child of an element type/index for the specified TinyMCE editor.
-     * Note that this works only if the content is plain text without formatting. Otherwise, the first child
-     * selects the part until the next sibling that would be a formatting node such as bold, italics etc. Also,
-     * a linebreak (<br/>) intercepts the selection.
-     *
-     * phpcs:disable
-     * @When /^I select the inner "(?P<textlocator_string>(?:[^"]|\\")*)" element in position "(?P<position_int>(?:[^"]|\\")*)" of the "(?P<locator_string>(?:[^"]|\\")*)" TinyMCE editor$/
-     * phpcs:enable
-     *
-     * @param string $textlocator The type of element to select (for example `p` or `span`)
-     * @param int $position The zero-indexed position
-     * @param string $locator The editor to select within
-     */
-    public function select_text_inner(string $textlocator, int $position, string $locator): void {
-        $this->require_tiny_tags();
-
-        $editor = $this->get_textarea_for_locator($locator);
-        $editorid = $editor->getAttribute('id');
-
-        // Ensure that a name is set on the iframe relating to the editorid.
-        $js = <<<EOF
-            const element = instance.dom.select("{$textlocator}")[{$position}].firstChild;
-            instance.selection.select(element);
-        EOF;
-
-        $this->execute_javascript_for_editor($editorid, $js);
     }
 }

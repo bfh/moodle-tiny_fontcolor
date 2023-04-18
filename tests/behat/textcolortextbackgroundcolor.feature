@@ -12,7 +12,7 @@ Feature: Tiny editor text color/text background color
     And I wait until the page is ready
     And I set the field "Description" to "<p>Some plain text</p><p>Some more text</p>"
     And I select the "p" element in position "1" of the "Description" TinyMCE editor
-    And I click on the "Format > Text foreground colour > Gray dark" submenu item for the "Description" TinyMCE editor
+    And I click on the color menu item "Text foreground colour" and choose "Gray dark" for the "Description" TinyMCE editor
     And I press "Update profile"
     Then I should see "Some plain text"
     And "//span[@style='color:rgb(10,44,46);']" "xpath_element" should exist
@@ -27,7 +27,7 @@ Feature: Tiny editor text color/text background color
     And I wait until the page is ready
     And I set the field "Description" to "<p>Some plain text</p><p>Some more text</p>"
     And I select the "p" element in position "1" of the "Description" TinyMCE editor
-    And I click on the "Format > Text background colour > Yellow" submenu item for the "Description" TinyMCE editor
+    And I click on the color menu item "Text background colour" and choose "Yellow" for the "Description" TinyMCE editor
     And I press "Update profile"
     Then I should see "Some plain text"
     And "//span[@style='background-color:rgb(226,176,7);']" "xpath_element" should exist
