@@ -30,6 +30,7 @@ of the corporate identity at your institution.
 - Add behat test for the admin settings page and reorganize tests.
 - Remove function `str_contains` to be PHP7.x compliant.
 - Change maturity of plugin to release candidate.
+- Privacy Provider was added.
 
 ## 0.2.0
 Initial release
