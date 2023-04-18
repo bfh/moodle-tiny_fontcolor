@@ -34,7 +34,7 @@ require_once(__DIR__ . '/../../../../tests/behat/behat_editor_tiny.php');
 /**
  * Extends general TinyMCE test to test the tiny_fontcolor plugin.
  */
-class behar_editor_tiny_fontcolor extends behat_editor_tiny {
+class behat_editor_tiny_fontcolor extends behat_editor_tiny {
 
     /**
      * Click on a button for the specified TinyMCE editor.
