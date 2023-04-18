@@ -1,5 +1,5 @@
 @editor @editor_tiny @tiny @tiny_fontcolor
-Feature: Tiny editor text color/text background color
+Feature: Tiny editor admin settings for text and background color
   To be able to choose colors in the tiny editor, I need to setup some colors in the admin settings.
 
   @javascript
