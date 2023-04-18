@@ -8,9 +8,9 @@ CI](https://github.com/bfh/moodle-tiny_fontcolor/workflows/Moodle%20Plugin%20CI/
 [![License GPL-3.0](https://img.shields.io/github/license/bfh/moodle-tiny_fontcolor?color=lightgrey)](https://github.com/bfh/moodle-tiny_fontcolor/blob/main/LICENSE)
 [![GitHub contributors](https://img.shields.io/github/contributors/bfh/moodle-tiny_fontcolor)](https://github.com/bfh/moodle-tiny_fontcolor/graphs/contributors)
 
-# To Install it manually #
+# Installation #
 
-- Unzip the plugin in the Moodle .../lib/editor/tiny/plugins/fontcolor directory.
+- Unzip the contents of the zip archive into the Moodle `.../lib/editor/tiny/plugins/fontcolor` directory.
 - As a Moodle Admin go to Site Administration -> Plugins -> Text Editors -> TinyMCE editor -> Tiny text color/text background color settings
 and add a view color names and color codes for at least on of the setting "Available text colors" or "Available text background colors".
 - You may also enable the color picker for text color or background color.
@@ -22,3 +22,14 @@ the text color setting and the background color setting.
 The color name can be an arbitrary string e.g. Red or Dark Green or whatever you name
 your color. The name can be also the "corporate name" e.g. that is used in any style guides
 of the corporate identity at your institution.
+
+# Version History #
+
+## 0.2.1
+
+- Add behat test for the admin settings page and reorganize tests.
+- Remove function `str_contains` to be PHP7.x compliant.
+- Change maturity of plugin to release candidate.
+
+## 0.2.0
+Initial release
