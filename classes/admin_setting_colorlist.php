@@ -145,9 +145,9 @@ class admin_setting_colorlist extends admin_setting {
             $names = [];
             $values = [];
             foreach ($_REQUEST as $key => $val) {
-                if (str_contains($key, $this->name . '_name_') !== false) {
+                if (strpos($key, $this->name . '_name_') !== false) {
                     $names[$key] = trim($val);
-                } else if (str_contains($key, $this->name . '_value_') !== false) {
+                } else if (strpos($key, $this->name . '_value_') !== false) {
                     $values[$key] = trim($val);
                 }
             }
