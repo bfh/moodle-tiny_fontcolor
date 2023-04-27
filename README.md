@@ -1,8 +1,8 @@
 moodle-tiny_fontcolor
 ========================
 
-[![Moodle Plugin 
-CI](https://github.com/bfh/moodle-tiny_fontcolor/workflows/Moodle%20Plugin%20CI/badge.svg?branch=master)](https://github.com/bfh/moodle-tiny_fontcolor/actions?query=workflow%3A%22Moodle+Plugin+CI%22+branch%3Amaster)
+![Release](https://img.shields.io/badge/Release-0.2.1-blue.svg)
+[![Moodle Plugin CI](https://github.com/bfh/moodle-tiny_fontcolor/workflows/Moodle%20Plugin%20CI/badge.svg?branch=master)](https://github.com/bfh/moodle-tiny_fontcolor/actions?query=workflow%3A%22Moodle+Plugin+CI%22+branch%3Amaster)
 [![PHP Support](https://img.shields.io/badge/php-7.4--8.1-blue)](https://github.com/bfh/moodle-tiny_fontcolor/action)
 [![Moodle Support](https://img.shields.io/badge/Moodle-4.1+-orange)](https://github.com/bfh/moodle-tiny_fontcolor/actions)
 [![License GPL-3.0](https://img.shields.io/github/license/bfh/moodle-tiny_fontcolor?color=lightgrey)](https://github.com/bfh/moodle-tiny_fontcolor/blob/main/LICENSE)
