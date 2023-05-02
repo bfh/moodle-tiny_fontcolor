@@ -1,7 +1,7 @@
 moodle-tiny_fontcolor
 ========================
 
-![Release](https://img.shields.io/badge/Release-0.2.1-blue.svg)
+![Release](https://img.shields.io/badge/Release-0.2.2-blue.svg)
 [![Moodle Plugin CI](https://github.com/bfh/moodle-tiny_fontcolor/workflows/Moodle%20Plugin%20CI/badge.svg?branch=master)](https://github.com/bfh/moodle-tiny_fontcolor/actions?query=workflow%3A%22Moodle+Plugin+CI%22+branch%3Amaster)
 [![PHP Support](https://img.shields.io/badge/php-7.4--8.1-blue)](https://github.com/bfh/moodle-tiny_fontcolor/action)
 [![Moodle Support](https://img.shields.io/badge/Moodle-4.1+-orange)](https://github.com/bfh/moodle-tiny_fontcolor/actions)
@@ -24,6 +24,13 @@ your color. The name can be also the "corporate name" e.g. that is used in any s
 of the corporate identity at your institution.
 
 # Version History #
+
+## 0.2.2
+
+- Lift software maturity level to STABLE.
+- Adapt CI to test against Moodle 4.2.
+- Fix example JSON in mustache templates and make CI have templates checked.
+- Fix issue [Probably, $string['helplinktext'] = 'Font colour'; is needed in the lang strings](https://github.com/bfh/moodle-tiny_fontcolor/issues/6).
 
 ## 0.2.1
 
