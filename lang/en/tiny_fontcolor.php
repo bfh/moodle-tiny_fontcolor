@@ -37,6 +37,7 @@ $string['colorPickerColor'] = 'Colour';
 $string['colorPickerSave'] = 'Apply';
 $string['colorPickerCancel'] = 'Cancel';
 $string['colorPickerErrHexCode'] = 'Invalid hex colour code: {0}';
+$string['colorPickerErrRgbCode'] = 'Invalid rgb value: {0}';
 $string['pluginname'] = 'Tiny font colour';
 $string['privacy:metadata'] = 'Tiny font colour does not store any personal data';
 $string['settings'] = 'Tiny text colour/text background colour settings';

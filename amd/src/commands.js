@@ -46,6 +46,7 @@ export const getSetup = async() => {
         colorPickerSave,
         colorPickerCancel,
         colorPickerErrHexCode,
+        colorPickerErrRgbCode,
     ] = await getStrings([
         'btnFgcolor',
         'menuItemFgcolor',
@@ -58,6 +59,7 @@ export const getSetup = async() => {
         'colorPickerSave',
         'colorPickerCancel',
         'colorPickerErrHexCode',
+        'colorPickerErrRgbCode'
     ].map((key) => ({key, component})));
     return (editor) => {
         register$c(editor, {
@@ -72,6 +74,7 @@ export const getSetup = async() => {
             'colorPickerSave': colorPickerSave,
             'colorPickerCancel': colorPickerCancel,
             'colorPickerErrHexCode': colorPickerErrHexCode,
+            'colorPickerErrRgbCode': colorPickerErrRgbCode,
         });
     };
 };

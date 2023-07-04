@@ -34,7 +34,7 @@
 import * as pf from './polyfill';
 import {getBackcolorMap, getForecolorMap, isBackcolorPickerOn, isForecolorPickerOn} from './options';
 import {forecolor, backcolor} from './common';
-import {isNullable} from "./polyfill";
+import {isHexString, isNullable} from "./polyfill";
 
 let global$4 = localStorage;
 
@@ -286,20 +286,32 @@ const registerTextColorMenuItem = (editor, name, format, text) => {
   });
 };
 const colorPickerDialog = editor => (callback, value) => {
-  let isValid = false;
   const onSubmit = api => {
     const data = api.getData();
     const hex = data.colorpicker;
+    const err = document.querySelector('.dlg-color-picker-error');
+    let isValid = true;
+    err.parentNode.parentNode.querySelectorAll('input').forEach((i, x) => {
+      if (x < 3) {
+        const m = ['R', 'G', 'B'];
+        const r = parseInt(i.value);
+        if (!i.value.match(/^\d{1,3}$/) || r < 0 || r > 255) {
+          err.innerHTML = labels.get('colorPickerErrRgbCode', m[x] + ' = ' + i.value);
+          i.focus();
+          isValid = false;
+        }
+      } else if (!isHexString('#' + i.value)) {
+        err.innerHTML = labels.get('colorPickerErrHexCode', hex);
+        i.focus();
+        isValid = false;
+      }
+    });
     if (isValid) {
       callback(pf.Optional.from(hex));
       api.close();
     } else {
-      editor.windowManager.alert(labels.get('colorPickerErrHexCode', hex));
-    }
-  };
-  const onAction = (_api, details) => {
-    if (details.name === 'hex-valid') {
-      isValid = details.value;
+      err.classList.remove('hidden');
+      err.classList.add('alert');
     }
   };
   const initialData = {colorpicker: value};
@@ -309,6 +321,9 @@ const colorPickerDialog = editor => (callback, value) => {
     body: {
       type: 'panel',
       items: [{
+        type: 'htmlpanel',
+        html: '<span class="dlg-color-picker-error hidden"></span>',
+      },{
         type: 'colorpicker',
         name: 'colorpicker',
         label: labels.get('colorPickerColor'),
@@ -328,7 +343,6 @@ const colorPickerDialog = editor => (callback, value) => {
       }
     ],
     initialData,
-    onAction,
     onSubmit,
     onClose: pf.noop,
     onCancel: () => {
