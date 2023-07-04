@@ -323,7 +323,7 @@ const colorPickerDialog = editor => (callback, value) => {
       items: [{
         type: 'htmlpanel',
         html: '<span class="dlg-color-picker-error hidden"></span>',
-      },{
+      }, {
         type: 'colorpicker',
         name: 'colorpicker',
         label: labels.get('colorPickerColor'),
