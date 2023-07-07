@@ -25,6 +25,9 @@ of the corporate identity at your institution.
 
 ## Version History
 
+### Current Master
+- Fix CI issue: (#1) HTML Validation info, line 10: Trailing slash on void elements has no effect and interacts badly with unquoted attribute values.
+
 ### 0.2.3
 - Lift software maturity level to RC.
 - Fix issue [The close button of the color picker can't be reach by keyboard](https://github.com/bfh/moodle-tiny_fontcolor/issues/10)
