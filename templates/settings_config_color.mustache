@@ -85,10 +85,10 @@
     Setting configtext.
 }}
 <div class="row">
-    <div class="col-sm-5">
+    <div class="col-sm-5 d-none d-md-block">
         {{header.name}}
     </div>
-    <div class="col-sm-7">
+    <div class="col-sm-7 d-none d-md-block">
         {{header.value}}
     </div>
 </div>
@@ -96,22 +96,24 @@
 
 <div class="{{name}}">
 {{#colors}}
-    <div class="row color-row">
-        <div class="form-text defaultsnext col-sm-11 col-md-5">
+    <div class="row color-row align-items-end">
+        <div class="form-text defaultsnext col-10 col-md-5">
+            <label class="d-md-none" for="{{name.id}}">{{header.name}}</label>
             <input type="text" name="{{name.name}}" value="{{name.value}}" id="{{name.id}}"
                    class="form-control {{#forceltr}}text-ltr{{/forceltr}}{{#name.invalid}} is-invalid{{/name.invalid}}" {{#readonly}}disabled{{/readonly}}>
         </div>
-        <div class="form-text defaultsnext col-sm-11 col-md-5">
+        <div class="form-text defaultsnext col-10 col-md-5">
+            <label class="d-md-none" for="{{value.id}}">{{header.value}}</label>
             <input type="text" name="{{value.name}}" value="{{value.value}}" id="{{value.id}}"
                    class="form-control {{#forceltr}}text-ltr{{/forceltr}}{{#value.invalid}} is-invalid{{/value.invalid}}" {{#readonly}}disabled{{/readonly}}>
         </div>
         {{#name.last}}
-            <div class="form-text defaultsnext col-sm-1 col-md-2">
+            <div class="form-text defaultsnext col-2">
                 <button class="btn btn-primary add" style="width: 2.3rem;">+</button>
             </div>
         {{/name.last}}
         {{^name.last}}
-            <div class="form-text defaultsnext col-sm-1 col-md-2">
+            <div class="form-text defaultsnext col-2">
                 <button class="btn btn-primary del" style="width: 2.3rem;">-</button>
             </div>
         {{/name.last}}
