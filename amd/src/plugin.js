@@ -29,6 +29,7 @@ import * as Configuration from './configuration';
 import {register as registerOptions} from './options';
 
 // Setup the tiny_fontcolor plugin.
+// eslint-disable-next-line no-async-promise-executor
 export default new Promise(async(resolve) => {
     // Note: The PluginManager.add function does not support asynchronous configuration.
     // Perform any asynchronous configuration here, and then call the PluginManager.add function.
