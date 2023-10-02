@@ -29,12 +29,14 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-require_once(__DIR__ . '/../../../../tests/behat/behat_editor_tiny.php');
+require_once(__DIR__ . '/../../../../../../behat/behat_base.php');
+require_once(__DIR__ . '/../../../../tests/behat/editor_tiny_helpers.php');
 
 /**
  * Extends general TinyMCE test to test the tiny_fontcolor plugin.
  */
-class behat_editor_tiny_fontcolor extends behat_editor_tiny {
+class behat_editor_tiny_fontcolor extends behat_base {
+    use editor_tiny_helpers;
 
     /**
      * Click on a button for the specified TinyMCE editor.
