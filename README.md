@@ -1,7 +1,7 @@
 moodle-tiny_fontcolor
 ========================
 
-![Release](https://img.shields.io/badge/Release-0.2.3-blue.svg)
+![Release](https://img.shields.io/badge/Release-0.3-blue.svg)
 [![Moodle Plugin CI](https://github.com/bfh/moodle-tiny_fontcolor/workflows/Moodle%20Plugin%20CI/badge.svg?branch=master)](https://github.com/bfh/moodle-tiny_fontcolor/actions?query=workflow%3A%22Moodle+Plugin+CI%22+branch%3Amaster)
 [![PHP Support](https://img.shields.io/badge/php-7.4--8.2-blue)](https://github.com/bfh/moodle-tiny_fontcolor/action)
 [![Moodle Support](https://img.shields.io/badge/Moodle-4.1+-orange)](https://github.com/bfh/moodle-tiny_fontcolor/actions)
@@ -25,8 +25,13 @@ of the corporate identity at your institution.
 
 ## Version History
 
-### Current Master
+### 0.3
 - Fix CI issue: (#1) HTML Validation info, line 10: Trailing slash on void elements has no effect and interacts badly with unquoted attribute values.
+- [Fix behat by switching to trait class](https://github.com/bfh/moodle-tiny_fontcolor/pull/12)
+by [Jason Platts](https://github.com/jason-platts)
+- [Preparing for PHP 8.2 Support](https://github.com/bfh/moodle-tiny_fontcolor/pull/13)
+by [Luca Bösch](https://github.com/lucaboesch)
+- Lifted software maturity to stable
 
 ### 0.2.3
 - Lift software maturity level to RC.
