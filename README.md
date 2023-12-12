@@ -23,7 +23,46 @@ The color name can be an arbitrary string e.g. Red or Dark Green or whatever you
 your color. The name can be also the "corporate name" e.g. that is used in any style guides
 of the corporate identity at your institution.
 
+### Colorscheme
+
+If you want a predefined color scheme, then you may add the json from
+the file `colorscheme.json` into the settings `textcolors` and/or `backgroundcolors`
+in the plugin settings. This can be done by e.g.
+
+```
+UPDATE config_plugins
+SET value = '<json_string>'
+WHERE plugin = 'tiny_fontcolor' AND name = 'textcolors';
+```
+
+### Multilanguage support
+
+Color names may also use language tags for the color names. Text filters
+are applied. For example setting black and white with German and English
+labels would look like this:
+
+```
+[
+    {
+        "name": "<span class=\"multilang\" lang=\"de\">Schwarz</span><span class=\"multilang\" lang=\"en\">Black</span>",
+        "value": "#000000"
+    },
+    {
+        "name": "<span class=\"multilang\" lang=\"de\">Weiss</span><span class=\"multilang\" lang=\"en\">White</span>",
+        "value": "#ffffff"
+    }
+]
+```
+
+The value of the `name` property can be copied as it is, in the admin settings area.
+
+The name of the color is used as a tooltip in the editor when hovering
+over the appropriate color square.
+
 ## Version History
+
+## Current Master
+- Add json for a comprehensive color scheme (thanks to Joseph Rézeau).
 
 ### 0.4
 - Add CI stack for Moodle 4.3
