@@ -25,7 +25,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-use \tiny_fontcolor\admin_setting_colorlist;
+use tiny_fontcolor\admin_setting_colorlist;
 
 $ADMIN->add('editortiny', new admin_category('tiny_fontcolor', new lang_string('pluginname', 'tiny_fontcolor')));
 
