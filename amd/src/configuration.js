@@ -21,7 +21,7 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-import {addMenubarItem, addToolbarButtons} from 'editor_tiny/utils';
+import {addMenubarItem, addQuickbarsToolbarItem, addToolbarButtons} from 'editor_tiny/utils';
 import {forecolor, backcolor} from './common';
 
 const configureToolbar = (toolbar) => {
@@ -35,9 +35,16 @@ const configureMenu = (menu) => {
     return menu;
 };
 
+const configureQuickbarToolbar = (quickbar) => {
+    quickbar = addQuickbarsToolbarItem(quickbar, '|', forecolor);
+    quickbar = addQuickbarsToolbarItem(quickbar, '|', backcolor);
+    return quickbar;
+};
+
 export const configure = (instanceConfig) => {
     return {
         toolbar: configureToolbar(instanceConfig.toolbar),
         menu: configureMenu(instanceConfig.menu),
+        quickbars_selection_toolbar: configureQuickbarToolbar(instanceConfig.quickbars_selection_toolbar),
     };
 };
