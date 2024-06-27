@@ -45,6 +45,7 @@ export const configure = (instanceConfig) => {
     return {
         toolbar: configureToolbar(instanceConfig.toolbar),
         menu: configureMenu(instanceConfig.menu),
+        // eslint-disable-next-line camelcase
         quickbars_selection_toolbar: configureQuickbarToolbar(instanceConfig.quickbars_selection_toolbar),
     };
 };
