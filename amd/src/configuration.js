@@ -21,7 +21,7 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-import {addMenubarItem, addQuickbarsToolbarItem, addToolbarButtons} from 'editor_tiny/utils';
+import {addMenubarItem, addContextmenuItem, addToolbarButtons} from 'editor_tiny/utils';
 import {forecolor, backcolor} from './common';
 
 const configureToolbar = (toolbar) => {
@@ -35,10 +35,8 @@ const configureMenu = (menu) => {
     return menu;
 };
 
-const configureQuickbarToolbar = (quickbar) => {
-    quickbar = addQuickbarsToolbarItem(quickbar, '|', forecolor);
-    quickbar = addQuickbarsToolbarItem(quickbar, '|', backcolor);
-    return quickbar;
+const configureContextMenu = (menu) => {
+    return addContextmenuItem(menu ?? '', '|', forecolor, backcolor);
 };
 
 export const configure = (instanceConfig) => {
@@ -46,6 +44,6 @@ export const configure = (instanceConfig) => {
         toolbar: configureToolbar(instanceConfig.toolbar),
         menu: configureMenu(instanceConfig.menu),
         // eslint-disable-next-line camelcase
-        quickbars_selection_toolbar: configureQuickbarToolbar(instanceConfig.quickbars_selection_toolbar),
+        quickbars_selection_toolbar: configureContextMenu(instanceConfig.quickbars_selection_toolbar),
     };
 };
