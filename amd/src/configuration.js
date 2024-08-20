@@ -36,7 +36,10 @@ const configureMenu = (menu) => {
 };
 
 const configureContextMenu = (menu) => {
-    return addContextmenuItem(menu ?? '', '|', forecolor, backcolor);
+    if (!menu) {
+        menu = '';
+    }
+    return addContextmenuItem(menu, '|', forecolor, backcolor);
 };
 
 export const configure = (instanceConfig) => {

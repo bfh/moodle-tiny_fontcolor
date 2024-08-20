@@ -1,7 +1,7 @@
 moodle-tiny_fontcolor
 ========================
 
-![Release](https://img.shields.io/badge/Release-0.6-blue.svg)
+![Release](https://img.shields.io/badge/Release-0.7-blue.svg)
 [![Moodle Plugin CI](https://github.com/bfh/moodle-tiny_fontcolor/workflows/Moodle%20Plugin%20CI/badge.svg?branch=main)](https://github.com/bfh/moodle-tiny_fontcolor/actions?query=workflow%3A%22Moodle+Plugin+CI%22+branch%3Amain)
 [![PHP Support](https://img.shields.io/badge/php-7.4--8.3-blue)](https://github.com/bfh/moodle-tiny_fontcolor/action)
 [![Moodle Support](https://img.shields.io/badge/Moodle-4.1--4.4-orange)](https://github.com/bfh/moodle-tiny_fontcolor/actions)
@@ -60,6 +60,12 @@ The name of the color is used as a tooltip in the editor when hovering
 over the appropriate color square.
 
 ## Version History
+
+### 0.7
+- Fix [HTML areas without files seem to fail with the tiny_fontcolor enabled #16](https://github.com/bfh/moodle-tiny_fontcolor/issues/16) and 
+[TinyMCE fails when creating a qtype_multichoice question #17](https://github.com/bfh/moodle-tiny_fontcolor/issues/17). The introduced context menu items in 0.6 didn't show up under
+some conditions (e.g. in mc questions for answers and feedback) when there was no previously
+defined contextmenu.
 
 ### 0.6
 - [Add quickbar support #14](https://github.com/bfh/moodle-tiny_fontcolor/issues/14)
