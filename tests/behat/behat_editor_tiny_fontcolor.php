@@ -39,6 +39,30 @@ class behat_editor_tiny_fontcolor extends behat_base {
     use editor_tiny_helpers;
 
     /**
+     * The main menu of the TinyMCE editor.
+     * @var string
+     */
+    const MAINMENU = 'Format';
+
+    /**
+     * The menu element of the TinyMCE editor.
+     * @var \Behat\Mink\Element\NodeElement
+     */
+    private $menubar;
+
+    /**
+     * The color name to choose from the little squares with the colors.
+     * @var string
+     */
+    private $color;
+
+    /**
+     * The menu item in the Format menu.
+     * @var string
+     */
+    private $label;
+
+    /**
      * Click on a button for the specified TinyMCE editor.
      *
      * phpcs:disable
@@ -50,18 +74,31 @@ class behat_editor_tiny_fontcolor extends behat_base {
      * @param string $locator The locator for the editor
      */
     public function i_click_on_colormenuitem_in_menu(string $label, string $color, string $locator): void {
+        global $CFG;
         $this->require_tiny_tags();
+
+        $this->label = trim($label);
+        $this->color = trim($color);
+
         $container = $this->get_editor_container_for_locator($locator);
 
-        $menubar = $container->find('css', '[role="menubar"]');
+        $this->menubar = $container->find('css', '[role="menubar"]');
 
-        $menus = [trim($label), trim($color)];
+        if ($CFG->version < 2024100700) {
+            $this->before_four_five();
+        } else {
+            $this->four_five_and_later();
+        }
+    }
 
+    /**
+     * Click the TinyMCE menu prior to Moodle 4.5
+     */
+    private function before_four_five() {
         // Open the menu bar.
-        $mainmenu = 'Format';
-        $this->execute('behat_general::i_click_on_in_the', [$mainmenu, 'button', $menubar, 'NodeElement']);
+        $this->execute('behat_general::i_click_on_in_the', [self::MAINMENU, 'button', $this->menubar, 'NodeElement']);
 
-        foreach ($menus as $menuitem) {
+        foreach ([$this->label, $this->color] as $menuitem) {
             // Find the menu that was opened.
             $openmenu = $this->find('css', '.tox-selected-menu');
 
@@ -77,5 +114,25 @@ class behat_editor_tiny_fontcolor extends behat_base {
             $link = $openmenu->find('css', "[title='{$menuitem}'][role^='menuitem']");
             $this->execute('behat_general::i_click_on', [$link, 'NodeElement']);
         }
+    }
+
+    /**
+     * Click the TinyMCE menu in Moodle 4.5 and later.
+     */
+    private function four_five_and_later() {
+        // Open the menu bar.
+        $mainmenu = self::MAINMENU;
+        $button = $this->menubar->find('xpath', "//span[text()='{$mainmenu}']");
+        $this->execute('behat_general::i_click_on', [$button, 'NodeElement']);
+
+        // Find the menu that was opened.
+        $openmenu = $this->find('css', '.tox-selected-menu');
+
+        $link = $openmenu->find('css', "[aria-label='{$this->label}'][role^='menuitem']");
+        $link->mouseover();
+        $this->execute('behat_general::i_click_on', [$link, 'NodeElement']);
+
+        $item = $openmenu->find('css', "[aria-label='{$this->color}'][role^='menuitemradio']");
+        $this->execute('behat_general::i_click_on', [$item, 'NodeElement']);
     }
 }
