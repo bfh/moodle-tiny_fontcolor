@@ -3,8 +3,8 @@ moodle-tiny_fontcolor
 
 ![Release](https://img.shields.io/badge/Release-0.8-blue.svg)
 [![Moodle Plugin CI](https://github.com/bfh/moodle-tiny_fontcolor/actions/workflows/moodle-plugin-ci.yml/badge.svg?branch=main)](https://github.com/bfh/moodle-tiny_fontcolor/actions/workflows/moodle-plugin-ci.yml)
-[![PHP Support](https://img.shields.io/badge/php-7.4--8.3-blue)](https://github.com/bfh/moodle-tiny_fontcolor/action)
-[![Moodle Support](https://img.shields.io/badge/Moodle-4.1--4.5-orange)](https://github.com/bfh/moodle-tiny_fontcolor/actions)
+[![PHP Support](https://img.shields.io/badge/php-7.4--8.4-blue)](https://github.com/bfh/moodle-tiny_fontcolor/action)
+[![Moodle Support](https://img.shields.io/badge/Moodle-4.1--5.0-orange)](https://github.com/bfh/moodle-tiny_fontcolor/actions)
 [![License GPL-3.0](https://img.shields.io/github/license/bfh/moodle-tiny_fontcolor?color=lightgrey)](https://github.com/bfh/moodle-tiny_fontcolor/blob/main/LICENSE)
 [![GitHub contributors](https://img.shields.io/github/contributors/bfh/moodle-tiny_fontcolor)](https://github.com/bfh/moodle-tiny_fontcolor/graphs/contributors)
 
@@ -60,6 +60,11 @@ The name of the color is used as a tooltip in the editor when hovering
 over the appropriate color square.
 
 ## Version History
+
+### 0.9
+
+- Adjustments for Moodle 5.0.
+- Remove Github actions to sync master and main branch.
 
 ### 0.8
 

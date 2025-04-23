@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - https://moodle.org/
+// This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -12,22 +12,24 @@
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Plugin version and other meta-data are defined here.
+ * Capabilities for the tiny_fontcolor plugin.
  *
- * @package     tiny_fontcolor
- * @copyright   2023 Luca Bösch <luca.boesch@bfh.ch>
- * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package    tiny_fontcolor
+ * @copyright  2025 Stephan Robotta <stephan.robotta@bfh.ch>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'tiny_fontcolor';
-$plugin->release = '0.9';
-$plugin->version = 2025042300;
-$plugin->requires = 2022112800;
-$plugin->maturity = MATURITY_STABLE;
-$plugin->supported = [401, 500];
-
+$capabilities = [
+    'tiny/fontcolor:use' => [
+        'captype' => 'read',
+        'contextlevel' => CONTEXT_USER,
+        'archetypes' => [
+            'editingteacher' => CAP_ALLOW,
+        ],
+    ],
+ ];
