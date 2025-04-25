@@ -39,7 +39,7 @@ $string['colorPickerErrRgbCode'] = 'Invalid rgb value: {0}';
 $string['colorPickerSave'] = 'Apply';
 $string['colorPickerTitle'] = 'Colour picker';
 $string['customColor'] = 'Custom colour';
-$string['helplinktext'] = 'Tiny font colour';
+$string['fontcolor:use'] = 'Use Tiny font colour';
 $string['menuItemBgcolor'] = 'Text background colour';
 $string['menuItemFgcolor'] = 'Text foreground colour';
 $string['placeholdercolorname'] = 'Descriptive name of colour';
@@ -52,3 +52,6 @@ $string['textcolorpicker'] = 'Colour picker for text colour';
 $string['textcolorpicker_desc'] = 'Should a colour picker for text colour be available';
 $string['textcolors'] = 'Available text colours';
 $string['textcolors_desc'] = 'A list of colour names on the left and their RGB colour code, e.g. "#000000". The values are the colours displayed in the dialogue to choose from. The names serve as as the tooltip when hovering over the colours.';
+
+// Deprecated since Moodle 4.5.
+$string['helplinktext'] = 'Tiny font colour';
