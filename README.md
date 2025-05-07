@@ -1,7 +1,7 @@
 moodle-tiny_fontcolor
 ========================
 
-![Release](https://img.shields.io/badge/Release-0.8-blue.svg)
+![Release](https://img.shields.io/badge/Release-0.10-blue.svg)
 [![Moodle Plugin CI](https://github.com/bfh/moodle-tiny_fontcolor/actions/workflows/moodle-plugin-ci.yml/badge.svg?branch=main)](https://github.com/bfh/moodle-tiny_fontcolor/actions/workflows/moodle-plugin-ci.yml)
 [![PHP Support](https://img.shields.io/badge/php-7.4--8.4-blue)](https://github.com/bfh/moodle-tiny_fontcolor/action)
 [![Moodle Support](https://img.shields.io/badge/Moodle-4.1--5.0-orange)](https://github.com/bfh/moodle-tiny_fontcolor/actions)
@@ -60,6 +60,9 @@ The name of the color is used as a tooltip in the editor when hovering
 over the appropriate color square.
 
 ## Version History
+
+### 0.10
+- Adjust capability context level according to [MDL-84884](https://tracker.moodle.org/browse/MDL-84884)
 
 ### 0.9
 
