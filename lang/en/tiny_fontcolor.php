@@ -27,9 +27,9 @@
 defined('MOODLE_INTERNAL') || die();
 
 $string['backgroundcolorpicker'] = 'Colour picker for text background colour';
-$string['backgroundcolorpicker_desc'] = 'Should a colour picker for text background color be available';
+$string['backgroundcolorpicker_desc'] = 'Should a colour picker for text background colour be available';
 $string['backgroundcolors'] = 'Available text background colours';
-$string['backgroundcolors_desc'] = 'A list of colour names on the left and their RGB colour code, e.g. "#000000". The values are the colorus displayed in the dialogue to choose from. The names serve as as the tooltip when hovering over the colours.';
+$string['backgroundcolors_desc'] = 'A list of colour names on the left and their RGB colour code, e.g. "#000000". The values are the colours displayed in the dialogue to choose from. The names serve as as the tooltip when hovering over the colours.';
 $string['btnBgcolor'] = 'Text background colour';
 $string['btnFgcolor'] = 'Text foreground colour';
 $string['colorPickerCancel'] = 'Cancel';
