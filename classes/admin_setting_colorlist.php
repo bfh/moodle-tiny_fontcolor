@@ -90,6 +90,7 @@ class admin_setting_colorlist extends admin_setting {
             'name' => $this->get_full_name(),
             'value' => static::PLACEHOLDER_ORIG_VALUE,
             'forceltr' => $this->get_force_ltr(),
+            'plugindir' => plugininfo::get_base_dir(),
             'readonly' => $this->is_readonly(),
             'colors' => [],
         ];
