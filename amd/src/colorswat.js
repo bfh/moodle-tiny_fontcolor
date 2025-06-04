@@ -32,7 +32,15 @@
 // ESLint directives.
 
 import * as pf from './polyfill';
-import {getBackcolorMap, getForecolorMap, isBackcolorPickerOn, isForecolorPickerOn} from './options';
+import {
+  getBackcolorMap,
+  getForecolorMap,
+  isBackcolorPickerOn,
+  isForecolorPickerOn,
+  useCssClasses,
+  getBsckcolorClasses,
+  getForecolorClasses
+} from './options';
 import {forecolor, backcolor} from './common';
 import {isHexString, isNullable} from "./polyfill";
 

@@ -45,7 +45,7 @@ class admin_setting_colorlist extends admin_setting {
 
     /**
      * Store here the data that where extracted from the post request when saving.
-     * @var array
+     * @var color_list
      */
     private $settingval;
 
@@ -64,21 +64,16 @@ class admin_setting_colorlist extends admin_setting {
         // from the request, validate it to know which field exactly caused the trouble being not valid.
         if ($data === static::PLACEHOLDER_ORIG_VALUE) {
             $this->get_setting_val_from_request();
-            $this->validate($data);
-            $colors = $this->settingval;
+            $this->validate();
+            $mustvalidate = true;
         } else {
             // Assume here that we got a json from the config out of the DB.
-            $colors = json_decode($data, true);
-            if (!is_array($colors)) {
-                $colors = [];
-            }
+            $this->settingval = color_list::load_from_json($data);
+            $mustvalidate = false;
         }
 
         // Add an empty value to have a black input line below the already defined colors.
-        $colors[] = [
-            'name' => '',
-            'value' => '',
-        ];
+        $this->settingval->add_color('', '');
 
         $default = $this->get_defaultsetting();
         $context = (object) [
@@ -95,18 +90,22 @@ class admin_setting_colorlist extends admin_setting {
             'colors' => [],
         ];
 
-        foreach (\array_keys($colors) as $i) {
+        $i = 1;
+        foreach ($this->settingval->get_list() as $color) {
             $row = [];
             foreach (['name', 'value'] as $field) {
-                $suffix = '_' . $field . '_' . ($i + 1);
+                $suffix = '_' . $field . '_' . $i;
+                $getter = 'get_' . $field;
+                $haserror = "has_{$field}_error";
                 $row[$field] = (object)[
                     'id' => $this->get_id() . $suffix,
                     'name' => $this->get_full_name() . $suffix,
-                    'value' => $colors[$i][$field] ?? '',
-                    'invalid' => $colors[$i][$field . '_error'] ?? false,
-                    'last' => $i + 1 === count($colors),
+                    'value' => $color->$getter(),
+                    'invalid' => $mustvalidate && $color->$haserror(),
+                    'last' => $i === $this->settingval->length(),
                 ];
             }
+            $i++;
             $context->colors[] = $row;
         }
         $html = $OUTPUT->render_from_template('tiny_fontcolor/settings_config_color', $context);
@@ -119,30 +118,24 @@ class admin_setting_colorlist extends admin_setting {
      * @return bool
      */
     public function validate(): bool {
-        $this->get_setting_val_from_request();
-        $isvalid = true;
-        foreach (\array_keys($this->settingval) as $i) {
-            if (!plugininfo::validatecolorcode($this->settingval[$i]['value'])) {
-                $this->settingval[$i]['value_error'] = true;
-                $isvalid = false;
-            }
-            if (empty($this->settingval[$i]['name'])) {
-                $this->settingval[$i]['name_error'] = true;
-                $isvalid = false;
+        foreach ($this->settingval->get_list() as $color) {
+            if (!$color->is_valid()) {
+                return false;
+
             }
         }
-        return $isvalid;
+        return true;
     }
 
     /**
      * Get complex settings value (that is later converted into a json) from the
      * POST params (i.e. from the single input fields of color name and value).
      *
-     * @return array
+     * @return color_list
      */
-    protected function get_setting_val_from_request(): array {
+    protected function get_setting_val_from_request(): color_list {
         if ($this->settingval === null) {
-            $this->settingval = [];
+            $this->settingval = new color_list();
             $names = [];
             $values = [];
             foreach ($_REQUEST as $key => $val) {
@@ -157,13 +150,85 @@ class admin_setting_colorlist extends admin_setting {
                 if (empty($names[$i]) && empty($values[$j])) {
                     continue;
                 }
-                $this->settingval[] = [
-                    'name' => $names[$i],
-                    'value' => $values[$j],
-                ];
+                $this->settingval->add_color($names[$i], $values[$j]);
             }
         }
         return $this->settingval;
+    }
+
+    /**
+     * Get the current setting whether to use css classnames or the color code directly.
+     * The settings is taken from the request (it might be changed in the current settings
+     * save action) or read from the settings values, when no information is in the request.
+     *
+     * @return bool
+     */
+    protected function use_css_classnames(): bool {
+
+        $name = substr($this->get_full_name(), 0, strrpos($this->get_full_name(), '_')) . '_usecssclassnames';
+        if (isset($_REQUEST) && isset($_REQUEST[$name])) {
+            return (bool)$_REQUEST[$name];
+        }
+        return (bool)$this->config_read('usecssclassnames');
+    }
+
+    /**
+     * Save the css class names of the colors in the theme / scss setting.
+     * Do this for all themes.
+     *
+     * @return bool
+     */
+    protected function save_css_classnames(): bool {
+        $themes = \core_component::get_plugin_list('theme');
+        foreach (\array_keys($themes) as $theme) {
+            $key = 'theme_' . $theme;
+            $scss = get_config($key, 'scss');
+            $p = mb_strpos($scss, $this->get_custom_css_marker('start'));
+            $q = mb_strpos($scss, $this->get_custom_css_marker('end'));
+            if ($p !== 0 && $q !== 0 && $p < $q) {
+                $scss = mb_substr($scss, 0, $p)
+                    . $this->get_custom_css_marker('start') . PHP_EOL
+                    . $this->get_css_string()
+                    . mb_substr($scss, $q);
+            } else {
+                $scss .= PHP_EOL . $this->get_custom_css_marker('start') . PHP_EOL
+                    . $this->get_css_string()
+                    . PHP_EOL . $this->get_custom_css_marker('end') . PHP_EOL;
+            }
+            try {
+                set_config('scss', $scss, $key);
+            } catch (\Exception $e) {
+                error_log("Error updating $key/scss -> reason: " . $e->getMessage());
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Marker string to find start and end of the custom scss that is set from this color
+     * option in the theme scss setting.
+     *
+     * @return string
+     */
+    protected function get_custom_css_marker(string $type): string {
+        return sprintf('/* automatically set by %s %s */', $this->get_full_name(), $type);
+    }
+
+    /**
+     * Having a list of css classes and their values, this function returns a valid
+     * css string. The css class names are prefixed with the plugin name and the settings key.
+     *
+     * @return string
+     */
+    public function get_css_string(): string {
+        $css = '';
+        $prefixclass = $this->plugin . '-' . $this->name . '-';
+        $cssproperty = $this->name === 'backgroundcolors' ? 'background-color' : 'color';
+        foreach ($this->settingval->get_css_class_list() as $name => $value) {
+            $css .= sprintf(".%s%s{%s:%s}\n", $prefixclass, $name, $cssproperty, $value);
+        }
+        return $css;
     }
 
     /**
@@ -179,7 +244,7 @@ class admin_setting_colorlist extends admin_setting {
     }
 
     /**
-     * Writes in a setting
+     * Writes the color list into a settings key.
      *
      * @param array $data The data to write
      * @return bool|\lang_string|string
@@ -191,6 +256,16 @@ class admin_setting_colorlist extends admin_setting {
         if ($this->validate() !== true) {
             return false;
         }
-        return ($this->config_write($this->name, json_encode($data)) ? '' : get_string('errorsetting', 'admin'));
+        // Write the settings as a json encoded string into the apporpiate settings key.
+        $res = ($this->config_write($this->name, $data->to_json()) ? '' : get_string('errorsetting', 'admin'));
+        if (!empty($res)) {
+            $res;
+        }
+        // In case there are css classes used, we need to write the class list with the colors into
+        // the themes scss setting as well.
+        if ($this->use_css_classnames() && !$this->save_css_classnames()) {
+            return get_string('errorupdatingthemescss', $this->plugin);
+        }
+        return '';
     }
 }

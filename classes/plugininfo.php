@@ -95,26 +95,26 @@ class plugininfo extends plugin implements plugin_with_menuitems, plugin_with_bu
     public static function get_plugin_configuration_for_context(context $context, array $options, array $fpoptions,
                                                                 ?editor $editor = null): array {
 
-        $config = [];
+        $config = [
+            'textcolorpicker' => (bool)get_config('tiny_fontcolor', 'textcolorpicker'),
+            'backgroundcolorpicker' => (bool)get_config('tiny_fontcolor', 'backgroundcolorpicker'),
+            'usecssclassnames' => (bool)get_config('tiny_fontcolor', 'usecssclassnames'),
+        ];
+
         foreach (['textcolors', 'backgroundcolors'] as $configfield) {
-            $data = json_decode(get_config('tiny_fontcolor', $configfield), true);
-            if (!\is_array($data)) {
-                $data = [];
-            }
+            $colors = color_list::load_from_json(get_config('tiny_fontcolor', $configfield));
             $array = [];
-            foreach ($data as $item) {
-                $name = trim($item['name']);
-                $value = trim($item['value']);
-                if (!empty($name) && static::validatecolorcode($value)) {
-                    $array[] = $value;
-                    $array[] = format_string($name, true, ['context' => $context]);
+            foreach ($colors->get_list() as $item) {
+                if ($item->is_valid()) {
+                    $array[] = $item->get_value();
+                    $array[] = format_string($item->get_name(), true, ['context' => $context]);
                 }
             }
             $config[$configfield] = $array;
+            if ($config['usecssclassnames']) {
+                $config[$configfield . '_classlist'] = $colors->get_css_class_list();
+            }
         }
-
-        $config['textcolorpicker'] = (bool)get_config('tiny_fontcolor', 'textcolorpicker');
-        $config['backgroundcolorpicker'] = (bool)get_config('tiny_fontcolor', 'backgroundcolorpicker');
 
         return $config;
     }
