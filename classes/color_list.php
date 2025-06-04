@@ -109,9 +109,10 @@ namespace tiny_fontcolor;
      * To avoid conflicts the suffix -n where n is a number, is added.
      * The result is an array with the css class name as the key and the css value as value.
      *
+     * @param ?string $prefix
      * @return array
      */
-    public function get_css_class_list(): array {
+    public function get_css_class_list(?string $prefix = ''): array {
         $list = [];
         if ($this->colors === null) {
             $list;
@@ -125,7 +126,7 @@ namespace tiny_fontcolor;
             if (\array_key_exists($sanitized, $list)) {
                 $sanitized .= '-' . count($list) + 1; 
             }
-            $list[$sanitized] = $color->get_value();
+            $list[$prefix . $sanitized] = $color->get_value();
         }
         return $list;
     }

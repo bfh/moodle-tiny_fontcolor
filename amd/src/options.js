@@ -91,13 +91,23 @@ export const register = (editor) => {
   });
 
   editor.options.register(forecolorClasses, {
-    processor: 'Array',
-    default: [],
+    processor: value => {
+      return {
+        value: Object.entries(value),
+        valid: true
+      };
+    },
+    "default": [],
   });
 
   editor.options.register(backcolorClasses, {
-    processor: 'Array',
-    default: [],
+    processor: value => {
+      return {
+        value: Object.entries(value),
+        valid: true
+      };
+    },
+    "default": [],
   });
 };
 
@@ -149,4 +159,4 @@ export const getForecolorClasses = (editor) => editor.options.get(forecolorClass
  * @param {TinyMCE.Editor} editor
  * @returns {boolean}
  */
-export const getBsckcolorClasses = (editor) => editor.options.get(backcolorClasses);
+export const getBackcolorClasses = (editor) => editor.options.get(backcolorClasses);

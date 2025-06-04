@@ -38,7 +38,7 @@ import {
   isBackcolorPickerOn,
   isForecolorPickerOn,
   useCssClasses,
-  getBsckcolorClasses,
+  getBackcolorClasses,
   getForecolorClasses
 } from './options';
 import {forecolor, backcolor} from './common';
@@ -183,6 +183,19 @@ const registerCommands = editor => {
     removeFormat(editor, format);
   });
 };
+const handleColorChange = (editor, format, value) => {
+  if (useCssClasses(editor)) {
+    const cssClass = forecolor.includes(format)
+      ? getForecolorClasses(editor).find((v) => v[1] === value)[0]
+      : getBackcolorClasses(editor).find((v) => v[1] === value)[0];
+    if (cssClass) {
+      // Need to add either a span or check in the node for a classList.
+      editor.execCommand('mceApplyTextcolor', format, value);
+      return;
+    }
+  }
+  editor.execCommand('mceApplyTextcolor', format, value);
+};
 const getAdditionalColors = hasCustom => {
   const type = 'choiceitem';
   const remove = {
@@ -208,7 +221,7 @@ const applyColor = (editor, format, value, onChoice) => {
     dialog(colorOpt => {
       colorOpt.each(color => {
         addColor(color);
-        editor.execCommand('mceApplyTextcolor', format, color);
+        handleColorChange(editor, format, color);
         onChoice(color);
       });
     }, fallbackColor);
@@ -217,7 +230,7 @@ const applyColor = (editor, format, value, onChoice) => {
     editor.execCommand('mceRemoveTextcolor', format);
   } else {
     onChoice(value);
-    editor.execCommand('mceApplyTextcolor', format, value);
+    handleColorChange(editor, format, value);
   }
 };
 const getColors$1 = (colors, hasCustom, type) => colors.concat(getCurrentColors(type).concat(getAdditionalColors(hasCustom)));

@@ -112,7 +112,7 @@ class plugininfo extends plugin implements plugin_with_menuitems, plugin_with_bu
             }
             $config[$configfield] = $array;
             if ($config['usecssclassnames']) {
-                $config[$configfield . '_classlist'] = $colors->get_css_class_list();
+                $config[$configfield . '_classlist'] = $colors->get_css_class_list("tiny_fontcolor-$configfield-");
             }
         }
 
