@@ -41,7 +41,7 @@ import {
   getBackcolorClasses,
   getForecolorClasses
 } from './options';
-import {forecolor, backcolor} from './common';
+import {component as pluginname, forecolor, backcolor} from './common';
 import {isHexString, isNullable} from "./polyfill";
 
 let global$4 = localStorage;
@@ -190,11 +190,45 @@ const handleColorChange = (editor, format, value) => {
       : getBackcolorClasses(editor).find((v) => v[1] === value)[0];
     if (cssClass) {
       // Need to add either a span or check in the node for a classList.
-      editor.execCommand('mceApplyTextcolor', format, value);
+      const prefix = pluginname + (forecolor.includes(format) ? '-textcolors-' : '-backgroundcolors-');
+      const selContent = editor.selection.getContent({ format: 'html' });
+      const el = editor.selection.getStart();
+      if (el.nodeType === document.ELEMENT_NODE && el.innerHTML.trim() === selContent.trim()) {
+        el.classList.forEach((cl) => {
+          if (cl.startsWith(prefix)) {
+            el.classList.remove(cl);
+          }
+        });
+        el.classList.add(cssClass);
+        /*
+        // ✅ Tell TinyMCE the content has changed
+        editor.undoManager.transact(() => {
+          editor.selection.select(el); // Optional: Reselect the new span
+          editor.nodeChanged();          // Triggers re-render and state update
+        });
+        */
+        return;
+      }
+      editor.selection.setContent(`<span class="${cssClass}">${selContent}</span>`);
       return;
     }
   }
   editor.execCommand('mceApplyTextcolor', format, value);
+};
+const handleColorRemove = (editor, format) => {
+  if (useCssClasses(editor)) {
+    const prefix = pluginname + (forecolor.includes(format) ? '-textcolors-' : '-backgroundcolors-');
+    const selContent = editor.selection.getContent({ format: 'html' });
+    const el = editor.selection.getStart();
+    if (el.nodeType === document.ELEMENT_NODE && el.innerHTML.trim() === selContent.trim()) {
+      el.classList.forEach((cl) => {
+        if (cl.startsWith(prefix)) {
+          el.classList.remove(cl);
+        }
+      });
+    }
+  }
+  editor.execCommand('mceRemoveTextcolor', format);
 };
 const getAdditionalColors = hasCustom => {
   const type = 'choiceitem';
@@ -227,7 +261,7 @@ const applyColor = (editor, format, value, onChoice) => {
     }, fallbackColor);
   } else if (value === 'remove') {
     onChoice('');
-    editor.execCommand('mceRemoveTextcolor', format);
+    handleColorRemove(format);
   } else {
     onChoice(value);
     handleColorChange(editor, format, value);
@@ -389,6 +423,25 @@ const register$c = (editor, txt) => {
     const lastBackColor = Cell(fallbackColor);
     registerTextColorButton(editor, backcolor, 'hilitecolor', labels.get('btnBgcolor'), lastBackColor);
     registerTextColorMenuItem(editor, backcolor, 'hilitecolor', labels.get('menuItemBgcolor'));
+  }
+
+  // The css clases are is theme_<name>/scss are not present in the editor.
+  // Therefore, we must add manually our css classes for the color management.
+  if (useCssClasses(editor)) {
+    editor.on('SkinLoaded', () => {
+      const contentStyles = [];
+      getBackcolorClasses(editor).forEach((e) => {
+        contentStyles.push(`.${e[0]}:{background-color:${e[1]}}`);
+      });
+      getForecolorClasses(editor).forEach((e) => {
+        contentStyles.push(`.${e[0]}:{color: ${e[1]}}`);
+      });
+      const style = document.createElement('style');
+      style.innerHTML = contentStyles.join(' ');
+      //editor.dom.select('#mceDefaultStyles')[0].innerHTML += contentStyles.join(' ');
+      editor.dom.select('#mceDefaultStyles')[0].parentNode.appendChild(style);
+      //editor.contentStyles.push(contentStyles.join(' '));
+    });
   }
 };
 

@@ -31,9 +31,18 @@
   * @copyright   2025 Stephan Robotta <stephan.robotta@bfh.ch>
   * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
   */
-
 class color {
+
+    /**
+     * Descriptive name of the color (might contain HTML to have multilang capability).
+     * @var string
+     */
     private $name;
+
+    /**
+     * Color code in hex notation.
+     * @var string
+     */
     private $value;
 
     /**

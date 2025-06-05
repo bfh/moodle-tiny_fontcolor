@@ -41,6 +41,11 @@ use editor_tiny\plugin_with_configuration;
 class plugininfo extends plugin implements plugin_with_menuitems, plugin_with_buttons, plugin_with_configuration {
 
     /**
+     * Plugin name.
+     */
+    public const PLUGIN_NAME = 'tiny_fontcolor';
+
+    /**
      * Get a list of the menu items provided by this plugin.
      *
      * @return string[]

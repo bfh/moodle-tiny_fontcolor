@@ -114,7 +114,7 @@ class admin_setting_colorlist extends admin_setting {
     }
 
     /**
-     * Data must be validated.
+     * Data must be validated. Check that each color has a name and a valid hex code.
      * @return bool
      */
     public function validate(): bool {
@@ -188,17 +188,17 @@ class admin_setting_colorlist extends admin_setting {
             if ($p !== 0 && $q !== 0 && $p < $q) {
                 $scss = mb_substr($scss, 0, $p)
                     . $this->get_custom_css_marker('start') . PHP_EOL
-                    . $this->get_css_string()
+                    . $this->settingval->get_css_string($this->name)
                     . mb_substr($scss, $q);
             } else {
                 $scss .= PHP_EOL . $this->get_custom_css_marker('start') . PHP_EOL
-                    . $this->get_css_string()
+                    . $this->settingval->get_css_string($this->name)
                     . PHP_EOL . $this->get_custom_css_marker('end') . PHP_EOL;
             }
             try {
                 set_config('scss', $scss, $key);
             } catch (\Exception $e) {
-                error_log("Error updating $key/scss -> reason: " . $e->getMessage());
+                debugging("Error updating $key/scss -> reason: " . $e->getMessage(), DEBUG_NORMAL, $e->getTrace());
                 return false;
             }
         }
@@ -214,22 +214,6 @@ class admin_setting_colorlist extends admin_setting {
      */
     protected function get_custom_css_marker(string $type): string {
         return sprintf('/* automatically set by %s %s */', $this->get_full_name(), $type);
-    }
-
-    /**
-     * Having a list of css classes and their values, this function returns a valid
-     * css string. The css class names are prefixed with the plugin name and the settings key.
-     *
-     * @return string
-     */
-    public function get_css_string(): string {
-        $css = '';
-        $prefixclass = $this->plugin . '-' . $this->name . '-';
-        $cssproperty = $this->name === 'backgroundcolors' ? 'background-color' : 'color';
-        foreach ($this->settingval->get_css_class_list() as $name => $value) {
-            $css .= sprintf(".%s%s{%s:%s}\n", $prefixclass, $name, $cssproperty, $value);
-        }
-        return $css;
     }
 
     /**

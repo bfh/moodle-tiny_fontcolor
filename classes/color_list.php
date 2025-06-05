@@ -31,8 +31,7 @@ namespace tiny_fontcolor;
  * @copyright   2025 Stephan Robotta <stephan.robotta@bfh.ch>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
- class color_list {
+class color_list {
 
     /**
      * @var color[]
@@ -117,18 +116,35 @@ namespace tiny_fontcolor;
         if ($this->colors === null) {
             $list;
         }
-        
+
         foreach ($this->colors as $color) {
             $sanitized = preg_replace('/[^a-z]/', '', strtolower(strip_tags($color->get_name())));
             if (empty($sanitized)) {
                 $sanitized = chr(97 + count($list));
             }
             if (\array_key_exists($sanitized, $list)) {
-                $sanitized .= '-' . count($list) + 1; 
+                $sanitized .= '-' . (count($list) + 1);
             }
             $list[$prefix . $sanitized] = $color->get_value();
         }
         return $list;
     }
 
+    /**
+     * Having a list of css classes and their values, this function returns a valid
+     * css string. The css class names are prefixed with the plugin name and the settings key.
+     *
+     * @param string $setting
+     * @return string
+     */
+    public function get_css_string(string $setting): string {
+        $css = '';
+        $prefixclass = plugininfo::PLUGIN_NAME . "-{$setting}-";
+        $cssproperty = $setting === 'backgroundcolors' ? 'background-color' : 'color';
+        foreach ($this->get_css_class_list() as $name => $value) {
+            $css .= sprintf(".%s%s{%s:%s}\n", $prefixclass, $name, $cssproperty, $value);
+        }
+        return $css;
+    }
  }
+ 
