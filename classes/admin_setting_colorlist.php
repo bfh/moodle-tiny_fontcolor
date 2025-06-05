@@ -209,6 +209,7 @@ class admin_setting_colorlist extends admin_setting {
      * Marker string to find start and end of the custom scss that is set from this color
      * option in the theme scss setting.
      *
+     * @param string $type
      * @return string
      */
     protected function get_custom_css_marker(string $type): string {
