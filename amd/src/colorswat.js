@@ -431,18 +431,13 @@ const register$c = (editor, txt) => {
     editor.on('SkinLoaded', () => {
       const contentStyles = [];
       getBackcolorClasses(editor).forEach((e) => {
-        contentStyles.push(`.${e[0]}:{background-color:${e[1]}}`);
+        contentStyles.push(`.${e[0]}{background-color:${e[1]}}`);
       });
       getForecolorClasses(editor).forEach((e) => {
-        contentStyles.push(`.${e[0]}:{color: ${e[1]}}`);
+        contentStyles.push(`.${e[0]}{color: ${e[1]}}`);
       });
-      // Eigther append the css to the already existing, or create a new style element
-      // editor.dom.select('#mceDefaultStyles')[0].innerHTML += contentStyles.join(' ');
-      const style = document.createElement('style');
-      style.innerHTML = contentStyles.join(' ');
-      editor.dom.select('#mceDefaultStyles')[0].parentNode.appendChild(style);
-      // That didn't work neither:
-      // editor.contentStyles.push(contentStyles.join(' '));
+      // Append the css to the already existing css.
+      editor.dom.select('#mceDefaultStyles')[0].innerHTML += contentStyles.join(' ');
     });
   }
 };
