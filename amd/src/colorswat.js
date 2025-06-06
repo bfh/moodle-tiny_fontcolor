@@ -41,7 +41,7 @@ import {
   getBackcolorClasses,
   getForecolorClasses
 } from './options';
-import {component as pluginname, forecolor, backcolor} from './common';
+import {forecolor, backcolor} from './common';
 import {isHexString, isNullable} from "./polyfill";
 
 let global$4 = localStorage;
@@ -189,27 +189,7 @@ const handleColorChange = (editor, format, value) => {
       ? getForecolorClasses(editor).find((v) => v[1] === value)[0]
       : getBackcolorClasses(editor).find((v) => v[1] === value)[0];
     if (cssClass) {
-      // Need to add either a span or check in the node for a classList.
-      const prefix = pluginname + (forecolor.includes(format) ? '-textcolors-' : '-backgroundcolors-');
-      const selContent = editor.selection.getContent({format: 'html'});
-      const el = editor.selection.getStart();
-      if (el.nodeType === document.ELEMENT_NODE && el.innerHTML.trim() === selContent.trim()) {
-        el.classList.forEach((cl) => {
-          if (cl.startsWith(prefix)) {
-            el.classList.remove(cl);
-          }
-        });
-        el.classList.add(cssClass);
-        /*
-        // ✅ Tell TinyMCE the content has changed
-        editor.undoManager.transact(() => {
-          editor.selection.select(el); // Optional: Reselect the new span
-          editor.nodeChanged();          // Triggers re-render and state update
-        });
-        */
-        return;
-      }
-      editor.selection.setContent(`<span class="${cssClass}">${selContent}</span>`);
+      editor.execCommand('mceApplyTextcolor', 'fontcolor_classes', cssClass);
       return;
     }
   }
@@ -217,16 +197,8 @@ const handleColorChange = (editor, format, value) => {
 };
 const handleColorRemove = (editor, format) => {
   if (useCssClasses(editor)) {
-    const prefix = pluginname + (forecolor.includes(format) ? '-textcolors-' : '-backgroundcolors-');
-    const selContent = editor.selection.getContent({format: 'html'});
-    const el = editor.selection.getStart();
-    if (el.nodeType === document.ELEMENT_NODE && el.innerHTML.trim() === selContent.trim()) {
-      el.classList.forEach((cl) => {
-        if (cl.startsWith(prefix)) {
-          el.classList.remove(cl);
-        }
-      });
-    }
+    editor.execCommand('mceRemoveTextcolor', 'fontcolor_classes');
+    return;
   }
   editor.execCommand('mceRemoveTextcolor', format);
 };
@@ -261,7 +233,7 @@ const applyColor = (editor, format, value, onChoice) => {
     }, fallbackColor);
   } else if (value === 'remove') {
     onChoice('');
-    handleColorRemove(format);
+    handleColorRemove(editor, format);
   } else {
     onChoice(value);
     handleColorChange(editor, format, value);
@@ -429,6 +401,15 @@ const register$c = (editor, txt) => {
   // Therefore, we must add manually our css classes for the color management.
   if (useCssClasses(editor)) {
     editor.on('SkinLoaded', () => {
+      editor.formatter.register('fontcolor_classes', {
+        inline: 'span',
+        attributes: {'class': '%value'},
+        links: true,
+        // eslint-disable-next-line camelcase
+        remove_similar: true,
+        // eslint-disable-next-line camelcase
+        clear_child_styles: true
+      });
       const contentStyles = [];
       getBackcolorClasses(editor).forEach((e) => {
         contentStyles.push(`.${e[0]}{background-color:${e[1]}}`);
