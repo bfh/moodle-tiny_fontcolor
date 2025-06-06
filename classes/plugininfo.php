@@ -100,12 +100,19 @@ class plugininfo extends plugin implements plugin_with_menuitems, plugin_with_bu
     public static function get_plugin_configuration_for_context(context $context, array $options, array $fpoptions,
                                                                 ?editor $editor = null): array {
 
+        // Set the mode first, css classnames or style attributes with color codes.
         $config = [
-            'textcolorpicker' => (bool)get_config('tiny_fontcolor', 'textcolorpicker'),
-            'backgroundcolorpicker' => (bool)get_config('tiny_fontcolor', 'backgroundcolorpicker'),
             'usecssclassnames' => (bool)get_config('tiny_fontcolor', 'usecssclassnames'),
         ];
+        // When css class names are used, we cannot use colors that are not defined, hence no color picker.
+        if ($config['usecssclassnames']) {
+            $config['textcolorpicker'] = $config['backgroundcolorpicker'] = false;
+        } else {
+            $config['textcolorpicker'] = (bool)get_config('tiny_fontcolor', 'textcolorpicker');
+            $config['backgroundcolorpicker'] = (bool)get_config('tiny_fontcolor', 'backgroundcolorpicker');
+        }
 
+        // Get the list of defined colors for text color and background color.
         foreach (['textcolors', 'backgroundcolors'] as $configfield) {
             $colors = color_list::load_from_json(get_config('tiny_fontcolor', $configfield));
             $array = [];
