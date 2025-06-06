@@ -191,7 +191,7 @@ const handleColorChange = (editor, format, value) => {
     if (cssClass) {
       // Need to add either a span or check in the node for a classList.
       const prefix = pluginname + (forecolor.includes(format) ? '-textcolors-' : '-backgroundcolors-');
-      const selContent = editor.selection.getContent({ format: 'html' });
+      const selContent = editor.selection.getContent({format: 'html'});
       const el = editor.selection.getStart();
       if (el.nodeType === document.ELEMENT_NODE && el.innerHTML.trim() === selContent.trim()) {
         el.classList.forEach((cl) => {
@@ -218,7 +218,7 @@ const handleColorChange = (editor, format, value) => {
 const handleColorRemove = (editor, format) => {
   if (useCssClasses(editor)) {
     const prefix = pluginname + (forecolor.includes(format) ? '-textcolors-' : '-backgroundcolors-');
-    const selContent = editor.selection.getContent({ format: 'html' });
+    const selContent = editor.selection.getContent({format: 'html'});
     const el = editor.selection.getStart();
     if (el.nodeType === document.ELEMENT_NODE && el.innerHTML.trim() === selContent.trim()) {
       el.classList.forEach((cl) => {
@@ -436,11 +436,13 @@ const register$c = (editor, txt) => {
       getForecolorClasses(editor).forEach((e) => {
         contentStyles.push(`.${e[0]}:{color: ${e[1]}}`);
       });
+      // Eigther append the css to the already existing, or create a new style element
+      // editor.dom.select('#mceDefaultStyles')[0].innerHTML += contentStyles.join(' ');
       const style = document.createElement('style');
       style.innerHTML = contentStyles.join(' ');
-      //editor.dom.select('#mceDefaultStyles')[0].innerHTML += contentStyles.join(' ');
       editor.dom.select('#mceDefaultStyles')[0].parentNode.appendChild(style);
-      //editor.contentStyles.push(contentStyles.join(' '));
+      // That didn't work neither:
+      // editor.contentStyles.push(contentStyles.join(' '));
     });
   }
 };

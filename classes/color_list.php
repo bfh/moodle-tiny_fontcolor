@@ -146,5 +146,4 @@ class color_list {
         }
         return $css;
     }
- }
- 
+}
