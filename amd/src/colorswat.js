@@ -186,10 +186,10 @@ const registerCommands = editor => {
 const handleColorChange = (editor, format, value) => {
   if (useCssClasses(editor)) {
     const cssClass = forecolor.includes(format)
-      ? getForecolorClasses(editor).find((v) => v[1] === value)[0]
-      : getBackcolorClasses(editor).find((v) => v[1] === value)[0];
+      ? getForecolorClasses(editor).find((v) => v[1] === value)
+      : getBackcolorClasses(editor).find((v) => v[1] === value);
     if (cssClass) {
-      editor.execCommand('mceApplyTextcolor', 'fontcolor_classes', cssClass);
+      editor.execCommand('mceApplyTextcolor', 'fontcolor_classes', cssClass[0]);
       return;
     }
   }

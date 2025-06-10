@@ -53,9 +53,9 @@ class color {
      */
     public function __construct(string $name, string $value) {
         $this->name = trim($name);
-        $this->value = trim($value);
+        $this->value = strtoupper(trim($value));
         // Prefix value with # if the hex annotation is used.
-        if (substr($this->value, 0, 1) !== '#' && preg_match('/^[0-9a-f]{6}/i', $this->value)) {
+        if (substr($this->value, 0, 1) !== '#' && preg_match('/^[0-9A-F]{6}/', $this->value)) {
             $this->value = '#' . $this->value;
         }
     }
