@@ -418,7 +418,16 @@ const register$c = (editor, txt) => {
         contentStyles.push(`.${e[0]}{color: ${e[1]}}`);
       });
       // Append the css to the already existing css.
-      editor.dom.select('#mceDefaultStyles')[0].innerHTML += contentStyles.join(' ');
+      const mceDefaultStyles = editor.dom.select('#mceDefaultStyles');
+      if (mceDefaultStyles.length > 0) {
+        mceDefaultStyles[0].innerHTML += contentStyles.join(' ');
+      } else {
+        const styleEl = document.createElement('style');
+        styleEl.setAttribute('type', 'text/css');
+        const cssText = document.createTextNode(contentStyles.join(''));
+        styleEl.appendChild(cssText);
+        editor.dom.select('head')[0].appendChild(styleEl);
+      }
     });
   }
 };
