@@ -30,7 +30,6 @@ Feature: Tiny editor text color/text background color
     And I set the field "Description" to "<p>Some plain text</p><p>Some more text</p>"
     And I select the "p" element in position "0" of the "Description" TinyMCE editor
     And I click on the color menu item "Text foreground colour" and choose "Gray dark" for the "Description" TinyMCE editor
-    #And I click on "#id_timezone_label" "css_element"
     And I select the "p" element in position "1" of the "Description" TinyMCE editor
     And I click on the color menu item "Text foreground colour" and choose "Gray Blur" for the "Description" TinyMCE editor
     And I press "Update profile"
@@ -74,3 +73,23 @@ Feature: Tiny editor text color/text background color
     And "//span[@style='background-color:#e2b007;']" "xpath_element" should exist
     And I should see "Some more text"
     And "//span[@style='background-color:rgba(255,0,255,0.41);']" "xpath_element" should exist
+
+  @javascript
+  Scenario: Set a text color using the Text and background color menu item with css classes in use.
+    Given the site is running Moodle version 4.5 or higher
+    And the following config values are set as admin:
+      | backgroundcolors | [{"name":"Yellow","value":"#e2b007"},{"name":"Rosa","value":"#ffccc0"}] | tiny_fontcolor |
+      | textcolors       | [{"name":"gray","value":"#ffccba"},{"name":"test1","value":"#fce34f"}]  | tiny_fontcolor |
+      | usecssclassnames | 1                                                                       | tiny_fontcolor |
+    And I log in as "admin"
+    And I open my profile in edit mode
+    And I wait until the page is ready
+    And I set the field "Description" to "<p>Some plain text</p><p>Some more text</p>"
+    And I select the "p" element in position "1" of the "Description" TinyMCE editor
+    And I click on the color menu item "Text foreground colour" and choose "test1" for the "Description" TinyMCE editor
+    And I select the "p" element in position "0" of the "Description" TinyMCE editor
+    And I click on the color menu item "Text background colour" and choose "Rosa" for the "Description" TinyMCE editor
+    And I press "Update profile"
+    Then I should see "Some plain text"
+    And "//span[@class='tiny_fontcolor-backgroundcolors-rosa']" "xpath_element" should exist
+    And "//span[@class='tiny_fontcolor-textcolors-test']" "xpath_element" should exist
