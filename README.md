@@ -81,6 +81,9 @@ There are a few things to mention when using css classes over the color codes:
   of all installed themes. Whenever these settings are changed manually, be careful
   not to remove the fontcolor styles. They can be applied again when saving the
   color settings of the plugin in the site administration.
+- The color picker in the editor is not available when the css classes are in use.
+  With the color picker you may use an arbitrary color that is not defined in the
+  css classes, and so no corresponding class name can be found.
 
 There is no easy switch between the use of css classes and the use of the style
 attributes. Whenever you change the setting, remember that existing content is
