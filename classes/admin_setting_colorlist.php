@@ -68,7 +68,8 @@ class admin_setting_colorlist extends admin_setting {
             $mustvalidate = true;
         } else {
             // Assume here that we got a json from the config out of the DB.
-            $this->settingval = color_list::load_from_json($data);
+            $json = (is_string($data)) ? $data : '';
+            $this->settingval = color_list::load_from_json($json);
             $mustvalidate = false;
         }
 
