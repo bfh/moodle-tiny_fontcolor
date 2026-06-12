@@ -2,6 +2,12 @@
 
 ## Changes
 
+### V1.4
+
+- New setting `addtopalette` that adds the defined text colours and text background
+  colours to the editor's shared `color_map` palette, so they appear as extra swatches
+  in the table/cell properties dialogues and other colour pickers.
+
 ### V1.3
 
 - Support for Moodle 5.2

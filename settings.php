@@ -69,6 +69,15 @@ if ($ADMIN->fulltree) {
     );
     $settings->add($setting);
 
+    $setting = new admin_setting_configselect(
+        'tiny_fontcolor/addtopalette',
+        new lang_string('addtopalette', 'tiny_fontcolor'),
+        new lang_string('addtopalette_desc', 'tiny_fontcolor'),
+        0,
+        $offon
+    );
+    $settings->add($setting);
+
     $setting = new admin_setting_configcheckbox(
         'tiny_fontcolor/usecssclassnames',
         new lang_string('usecssclassnames', 'tiny_fontcolor'),

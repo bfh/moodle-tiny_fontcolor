@@ -26,6 +26,8 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+$string['addtopalette'] = 'Add defined colours to the editor palette';
+$string['addtopalette_desc'] = 'When enabled, the defined text colours and text background colours are added to the editor\'s shared colour palette. They then appear as extra swatches in the table properties and cell properties dialogue colour pickers, and in other colour pickers throughout the editor, alongside the standard colours.';
 $string['backgroundcolorpicker'] = 'Colour picker for text background colour';
 $string['backgroundcolorpicker_desc'] = 'Should a colour picker for text background colour be available';
 $string['backgroundcolors'] = 'Available text background colours';
