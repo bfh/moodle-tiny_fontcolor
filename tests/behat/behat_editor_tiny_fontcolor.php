@@ -144,7 +144,7 @@ class behat_editor_tiny_fontcolor extends behat_base {
      * This reads the colour map the editor was initialised with rather than driving the
      * dialogue UI, so it asserts the actual contract: the configured palette reaches the
      * table border/background colour pickers. Those dialogue pickers read TinyMCE's
-     * editor-wide color_map option, so both border and background colours resolve there.
+     * editor-wide table_{border,background}_color_map option, which is set by the fontcolor plugin.
      *
      * phpcs:disable
      * @Then /^the "(?P<locator_string>(?:[^"]|\\")*)" TinyMCE editor (?P<negate_string>should|should not) offer "(?P<color_string>(?:[^"]|\\")*)" as a table (?P<type_string>border|background) colour$/
@@ -160,11 +160,9 @@ class behat_editor_tiny_fontcolor extends behat_base {
 
         $editorid = $this->get_textarea_for_locator($locator)->getAttribute('id');
 
-        $colours = $this->evaluate_javascript_for_editor(
-            $editorid,
-            "resolve(instance.options.get('color_map') || []);"
-        );
-        $offered = is_array($colours) && in_array($color, $colours, true);
+        $js = "resolve(instance.options.get('table_{$type}_color_map') || []);";
+        $colours = $this->evaluate_javascript_for_editor($editorid, $js);
+        $offered = is_array($colours) && in_array($color, array_merge(...array_map('array_values', $colours)), true);
 
         if ($negate === 'should' && !$offered) {
             throw new ExpectationException(

@@ -17,35 +17,27 @@
  * Adds the defined colours to the editor's shared colour palette (color_map) for tiny_fontcolor.
  *
  * @module      tiny_fontcolor
- * @copyright   2023 Luca Bösch <luca.boesch@bfh.ch>
+ * @copyright   2026 Kristian Ringer <https://github.com/kristian-94>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 import {getForecolorMap, getBackcolorMap, isAddToPaletteOn} from './options';
 
-const colorMapOption = 'color_map';
-
 /**
- * Build a flat [value, name, ...] colour map from the given colour entries, skipping duplicate values.
+ * Convert our colour entries into the {title, value} object shape that the table plugin's
+ * table_*_color_map options expect (they are registered with the 'object[]' processor).
  *
- * The color_map option reads back as objects but its processor only accepts a flat array of strings,
- * so we rebuild the flat form and let the processor recreate the objects.
+ * Our colours may carry a leading '#' and an alpha channel (#RRGGBBAA). The table plugin only
+ * recognises 3- or 6-digit hex; anything else falls back to a canvas getImageData() parse whose
+ * read-back is perturbed by browser anti-fingerprinting noise, making the swatch colours drift on
+ * every open. So we normalise to a bare 6-digit hex here to keep the values stable.
  *
- * @param {...object[]} sources Arrays of colours, each entry {value, text}.
- * @returns {string[]} A flat colour map for the color_map option.
+ * @param {object[]} colors Colour entries, each {value, text}.
+ * @returns {object[]} Colour map entries {title, value} for the table_*_color_map options.
  */
-const buildColorMap = (...sources) => {
-    const flat = [];
-    const seen = new Set();
-    sources.flat().forEach(({value, text}) => {
-        const key = String(value).toUpperCase();
-        if (!seen.has(key)) {
-            seen.add(key);
-            flat.push(value, text);
-        }
-    });
-    return flat;
-};
+const buildColorMap = (colors) => colors.map(color => ({
+    value: color.value.replace(/^#/, '').substring(0, 6),
+    title: color.text,
+}));
 
 /**
  * Add the defined colours to the editor's shared colour palette when the setting is enabled.
@@ -57,9 +49,12 @@ export const setup = (editor) => {
         return;
     }
     editor.on('init', () => {
-        const colors = getForecolorMap(editor).concat(getBackcolorMap(editor));
-        if (colors.length) {
-            editor.options.set(colorMapOption, buildColorMap(editor.options.get(colorMapOption), colors));
-        }
+        // Empty the default color palette, that is used inside the table properties (the color picker and
+        // erase pen remain there anyway).
+        editor.options.set('color_map', []);
+        // Set palette for foreground and background color for table border and background.
+        // These will show up in the context menu of the table plugin when clicking into a cell.
+        editor.options.set('table_border_color_map', buildColorMap(getForecolorMap(editor)));
+        editor.options.set('table_background_color_map', buildColorMap(getBackcolorMap(editor)));
     });
 };
