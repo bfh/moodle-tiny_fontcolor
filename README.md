@@ -112,6 +112,12 @@ palette separately. Also the color picker can not be removed. Therefore, at this
 place the color map is empty and the color picker and removal pen remain. It is
 recommended to use the color selectors from the context menu only.
 
+**Note**: the `usecssclassnames` setting does not apply for the table colors.
+This is because the table is an additional plugin that handles color management
+in it's own way. The fontcolor plugin only manipulates the color palette to
+choose from. When adding a color to a cell background or as a border, the
+hexcode is used always with the inline style.
+
 ## Version History
 
 See [Changes](CHANGES.md)
