@@ -20,7 +20,7 @@
  * @copyright   2026 Kristian Ringer <https://github.com/kristian-94>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-import {getForecolorMap, getBackcolorMap, isAddToPaletteOn} from './options';
+import {getForecolorMap, getBackcolorMap, isUseForTableOn} from './options';
 
 /**
  * Convert our colour entries into the {title, value} object shape that the table plugin's
@@ -45,7 +45,7 @@ const buildColorMap = (colors) => colors.map(color => ({
  * @param {TinyMCE.Editor} editor
  */
 export const setup = (editor) => {
-    if (!isAddToPaletteOn(editor)) {
+    if (!isUseForTableOn(editor)) {
         return;
     }
     editor.on('init', () => {

@@ -4,9 +4,8 @@
 
 ### V1.4
 
-- New setting `addtopalette` that adds the defined text colours and text background
-  colours to the editor's shared `color_map` palette, so they appear as extra swatches
-  in the table/cell properties dialogues and other colour pickers.
+- New setting `usefortable` that uses the defined text and background colors for the
+  table settings as well. Thanks to [Kristian Ringer](https://github.com/kristian-94).
 
 ### V1.3
 

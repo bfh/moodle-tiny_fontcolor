@@ -115,7 +115,7 @@ class plugininfo extends plugin implements plugin_with_buttons, plugin_with_conf
         }
 
         // Whether the defined colours are added to the editor's shared colour palette.
-        $config['addtopalette'] = (bool)get_config('tiny_fontcolor', 'addtopalette');
+        $config['usefortable'] = (bool)get_config('tiny_fontcolor', 'usefortable');
 
         // Get the list of defined colors for text color and background color.
         foreach (['textcolors', 'backgroundcolors'] as $configfield) {

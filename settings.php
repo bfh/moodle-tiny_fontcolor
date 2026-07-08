@@ -69,12 +69,11 @@ if ($ADMIN->fulltree) {
     );
     $settings->add($setting);
 
-    $setting = new admin_setting_configselect(
-        'tiny_fontcolor/addtopalette',
-        new lang_string('addtopalette', 'tiny_fontcolor'),
-        new lang_string('addtopalette_desc', 'tiny_fontcolor'),
-        0,
-        $offon
+    $setting = new admin_setting_configcheckbox(
+        'tiny_fontcolor/usefortable',
+        new lang_string('usefortable', 'tiny_fontcolor'),
+        new lang_string('usefortable_desc', 'tiny_fontcolor'),
+        1
     );
     $settings->add($setting);
 

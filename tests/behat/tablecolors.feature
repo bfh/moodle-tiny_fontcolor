@@ -8,7 +8,7 @@ Feature: Tiny editor table colours
     Given the following config values are set as admin:
       | textcolors       | [{"name":"Brand navy","value":"#404e8b"}] | tiny_fontcolor |
       | backgroundcolors | [{"name":"Brand sky","value":"#aee1ff"}]  | tiny_fontcolor |
-      | addtopalette     | 1                                         | tiny_fontcolor |
+      | usefortable      | 1                                         | tiny_fontcolor |
     And I log in as "admin"
     And I open my profile in edit mode
     And I wait until the page is ready
@@ -20,7 +20,7 @@ Feature: Tiny editor table colours
     Given the following config values are set as admin:
       | textcolors       | [{"name":"Brand navy","value":"#404e8b"}] | tiny_fontcolor |
       | backgroundcolors | [{"name":"Brand sky","value":"#aee1ff"}]  | tiny_fontcolor |
-      | addtopalette     | 0                                         | tiny_fontcolor |
+      | usefortable      | 0                                         | tiny_fontcolor |
     And I log in as "admin"
     And I open my profile in edit mode
     And I wait until the page is ready

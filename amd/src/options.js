@@ -30,7 +30,7 @@ const forecolorMap = getPluginOptionName(pluginName, 'textcolors');
 const backcolorMap = getPluginOptionName(pluginName, 'backgroundcolors');
 const forecolorPicker = getPluginOptionName(pluginName, 'textcolorpicker');
 const backcolorPicker = getPluginOptionName(pluginName, 'backgroundcolorpicker');
-const addToPalette = getPluginOptionName(pluginName, 'addtopalette');
+const useForTable = getPluginOptionName(pluginName, 'usefortable');
 const useCssClassnames = getPluginOptionName(pluginName, 'usecssclassnames');
 const forecolorClasses = getPluginOptionName(pluginName, 'textcolors_classlist');
 const backcolorClasses = getPluginOptionName(pluginName, 'backgroundcolors_classlist');
@@ -86,7 +86,7 @@ export const register = (editor) => {
     "default": false,
   });
 
-  editor.options.register(addToPalette, {
+  editor.options.register(useForTable, {
     processor: 'boolean',
     "default": false,
   });
@@ -151,7 +151,7 @@ export const isBackcolorPickerOn = (editor) => editor.options.get(backcolorPicke
  * @param {TinyMCE.Editor} editor
  * @returns {boolean}
  */
-export const isAddToPaletteOn = (editor) => editor.options.get(addToPalette);
+export const isUseForTableOn = (editor) => editor.options.get(useForTable);
 /**
  * Get whether the the color codes or css classes are used.
  *

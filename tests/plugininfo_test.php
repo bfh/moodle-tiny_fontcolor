@@ -23,7 +23,7 @@ use context_system;
  *
  * @package    tiny_fontcolor
  * @category   test
- * @copyright  2026 Kristian
+ * @copyright  2026 Kristian Ringer <https://github.com/kristian-94>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 final class plugininfo_test extends \advanced_testcase {
@@ -36,17 +36,15 @@ final class plugininfo_test extends \advanced_testcase {
     }
 
     /**
-     * The add-to-palette setting must reach the editor configuration so the client can
-     * decide whether to add the defined colours to the shared colour palette.
+     * The use for table setting must reach the editor configuration so the client can
+     * decide whether to use the defined colours in the table.
      *
      * @covers \tiny_fontcolor\plugininfo::get_plugin_configuration_for_context
      */
-    public function test_addtopalette_enabled_is_passed_to_configuration(): void {
-        set_config('addtopalette', 1, 'tiny_fontcolor');
-
+    public function test_usefortable_enabled_is_passed_to_configuration(): void {
         $config = plugininfo::get_plugin_configuration_for_context(context_system::instance(), [], []);
 
-        $this->assertTrue($config['addtopalette']);
+        $this->assertTrue($config['usefortable']);
     }
 
     /**
@@ -55,10 +53,11 @@ final class plugininfo_test extends \advanced_testcase {
      *
      * @covers \tiny_fontcolor\plugininfo::get_plugin_configuration_for_context
      */
-    public function test_addtopalette_defaults_to_disabled(): void {
+    public function test_usefortable_defaults_to_disabled(): void {
+        set_config('usefortable', 0, 'tiny_fontcolor');
         $config = plugininfo::get_plugin_configuration_for_context(context_system::instance(), [], []);
 
-        $this->assertFalse($config['addtopalette']);
+        $this->assertFalse($config['usefortable']);
     }
 
     /**
