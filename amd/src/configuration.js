@@ -42,11 +42,24 @@ const configureContextMenu = (menu) => {
     return addContextmenuItem(menu, '|', forecolor, backcolor);
 };
 
+// The default table context toolbar (see the table plugin's defaultTableToolbar). We re-declare it
+// here because table_toolbar is read at plugin setup time, so the swatch buttons must be part of the
+// initial editor config rather than set later on the 'init' event.
+const defaultTableToolbar = 'tableprops tabledelete '
+    + '| tableinsertrowbefore tableinsertrowafter tabledeleterow '
+    + '| tableinsertcolbefore tableinsertcolafter tabledeletecol';
+
+// Add the per-field colour swatch buttons that consume table_background_color_map / table_border_color_map.
+const configureTableToolbar = (tableToolbar) =>
+    (tableToolbar || defaultTableToolbar) + ' | tablecellbackgroundcolor tablecellbordercolor';
+
 export const configure = (instanceConfig) => {
     return {
         toolbar: configureToolbar(instanceConfig.toolbar),
         menu: configureMenu(instanceConfig.menu),
         // eslint-disable-next-line camelcase
         quickbars_selection_toolbar: configureContextMenu(instanceConfig.quickbars_selection_toolbar),
+        // eslint-disable-next-line camelcase
+        table_toolbar: configureTableToolbar(instanceConfig.table_toolbar),
     };
 };
