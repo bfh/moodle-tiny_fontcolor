@@ -327,12 +327,12 @@ const colorPickerDialog = editor => (callback, value) => {
         const m = ['R', 'G', 'B'];
         const r = parseInt(i.value);
         if (!i.value.match(/^\d{1,3}$/) || r < 0 || r > 255) {
-          err.innerHTML = labels.get('colorPickerErrRgbCode', m[x] + ' = ' + i.value);
+          err.textContent = labels.get('colorPickerErrRgbCode', m[x] + ' = ' + i.value);
           i.focus();
           isValid = false;
         }
       } else if (!isHexString('#' + i.value)) {
-        err.innerHTML = labels.get('colorPickerErrHexCode', hex);
+        err.textContent = labels.get('colorPickerErrHexCode', hex);
         i.focus();
         isValid = false;
       }

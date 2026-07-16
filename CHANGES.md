@@ -2,6 +2,10 @@
 
 ## Changes
 
+### Current main
+
+- Adapt most of the findings from the MDLShield diagnostics.
+
 ### V1.4
 
 - New setting `usefortable` that uses the defined text and background colors for the

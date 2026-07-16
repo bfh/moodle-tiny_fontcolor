@@ -113,7 +113,7 @@ class color_list {
     public function get_css_class_list(?string $prefix = ''): array {
         $list = [];
         if ($this->colors === null) {
-            $list;
+            return $list;
         }
 
         foreach ($this->colors as $color) {

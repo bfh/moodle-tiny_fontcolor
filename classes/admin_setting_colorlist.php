@@ -165,8 +165,9 @@ class admin_setting_colorlist extends admin_setting {
     protected function use_css_classnames(): bool {
 
         $name = substr($this->get_full_name(), 0, strrpos($this->get_full_name(), '_')) . '_usecssclassnames';
-        if (isset($_REQUEST) && isset($_REQUEST[$name])) {
-            return (bool)$_REQUEST[$name];
+        $value = optional_param($name, null, PARAM_BOOL);
+        if ($value !== null) {
+            return (bool)$value;
         }
         return (bool)$this->config_read('usecssclassnames');
     }
@@ -243,7 +244,7 @@ class admin_setting_colorlist extends admin_setting {
         // Write the settings as a json encoded string into the apporpiate settings key.
         $res = ($this->config_write($this->name, $data->to_json()) ? '' : get_string('errorsetting', 'admin'));
         if (!empty($res)) {
-            $res;
+            return $res;
         }
         // In case there are css classes used, we need to write the class list with the colors into
         // the themes scss setting as well.
