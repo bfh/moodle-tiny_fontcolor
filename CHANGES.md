@@ -5,6 +5,8 @@
 ### Current main
 
 - Adapt most of the findings from the MDLShield diagnostics.
+- Remove the github ci to release a new version of the plugin in the now obsolete
+  Moodle plugin directory.
 
 ### V1.4
 
