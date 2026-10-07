@@ -1,7 +1,7 @@
 moodle-tiny_fontcolor
-========================
+=====================
 
-![Release](https://img.shields.io/badge/Release-1.4-blue.svg)
+![Release](https://img.shields.io/badge/Release-1.5-blue.svg)
 [![Moodle Plugin CI](https://github.com/bfh/moodle-tiny_fontcolor/actions/workflows/moodle-plugin-ci.yml/badge.svg?branch=main)](https://github.com/bfh/moodle-tiny_fontcolor/actions/workflows/moodle-plugin-ci.yml)
 [![MDL Shield](https://img.shields.io/endpoint?url=https%3A%2F%2Fmdlshield.com%2Fapi%2Fbadge%2Ftiny_fontcolor)](https://mdlshield.com/plugins/tiny_fontcolor)
 [![PHP Support](https://img.shields.io/badge/php-8.1--8.4-blue)](https://github.com/bfh/moodle-tiny_fontcolor/action)
@@ -12,10 +12,11 @@ moodle-tiny_fontcolor
 ## Installation
 
 - Unzip the contents of the zip archive into the Moodle `<moodle_base>/lib/editor/tiny/plugins/fontcolor` directory,
-  (`<moodle_base>/public/lib/editor/tiny/plugins/fontcolor` as of Moodle 5.1)
+  (`<moodle_base>/public/lib/editor/tiny/plugins/fontcolor` as of Moodle 5.1 onwards)
 - As a Moodle Admin go to Site Administration -> Plugins -> Text Editors -> TinyMCE editor -> Tiny text color/text background color settings
-and add a view color names and color codes for at least on of the setting "Available text colors" or "Available text background colors".
-- You may also enable the color picker for text color or background color.
+and add a some color names and color codes for at least on of the setting "Available text colors" or "Available text background colors".
+- Optional enable the color picker for text color or background color.
+- Save the color palette. Afterwards color selectors appear in TinyMCE.
  
 If no colors are available and the color picker is disabled then the
 menu item and button in the TinyMCE editor will not appear. This is valid for both,
@@ -56,10 +57,11 @@ labels would look like this:
 ]
 ```
 
-The value of the `name` property can be copied as it is, in the admin settings area.
+The value of the `name` property can be copied as it is, in the admin settings area at
+"Descriptive name of colour" fields.
 
 The name of the color is used as a tooltip in the editor when hovering
-over the appropriate color square.
+over the appropriate colored square.
 
 ### Use CSS classes
 
@@ -75,11 +77,13 @@ There are a few things to mention when using css classes over the color codes:
   the same instance (course copy, sharing cart). In these cases the colors will also
   work on the copied item.
 - Deinstalling the plugin will leave the colors because the css is stored in the
-  theme settings.
+  theme settings. The insered css class names with their colors values are not removed
+  during the deinstallation routine of the plugin. In case wanted, you can edit the
+  setting `scss` of **each** installed theme.
 - The class names are derived from the descriptive color names. Invalid characters
   will be filtered, html is stripped (in case you use multilanguage annotation from
   Moodle).
-- CSS classes with the appropriate styles are stored in the custom scss settings
+- CSS classes with the appropriate styles are stored in the custom `scss` settings
   of all installed themes. Whenever these settings are changed manually, be careful
   not to remove the fontcolor styles. They can be applied again when saving the
   color settings of the plugin in the site administration.
@@ -90,7 +94,9 @@ There are a few things to mention when using css classes over the color codes:
 There is no easy switch between the use of css classes and the use of the style
 attributes. Whenever you change the setting, remember that existing content is
 not changed. When editing the content, the plugin will only change the colors in
-the specified mode.
+the specified mode. If you change to css class names, edit a text that has previously
+defined colors in the style attribute, these remain and must be manually changed
+or removed.
 
 ### Colors with tables
 

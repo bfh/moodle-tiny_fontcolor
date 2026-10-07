@@ -2,11 +2,13 @@
 
 ## Changes
 
-### Current main
+### v1.5
 
+- Add support for Moodle 5.3.
 - Adapt most of the findings from the MDLShield diagnostics.
 - Remove the github ci to release a new version of the plugin in the now obsolete
   Moodle plugin directory.
+- Aditional changes that were adapted from suggestions from another customer audit.
 
 ### V1.4
 
