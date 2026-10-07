@@ -139,9 +139,12 @@ class admin_setting_colorlist extends admin_setting {
             $values = [];
             foreach ($_REQUEST as $key => $val) {
                 if (strpos($key, $this->name . '_name_') !== false) {
-                    $names[$key] = trim($val);
+                    $names[$key] = clean_param($val, PARAM_RAW_TRIMMED);
                 } else if (strpos($key, $this->name . '_value_') !== false) {
-                    $values[$key] = trim($val);
+                    $values[$key] = preg_replace('/[^0-9a-fA-F]/', '', clean_param($val, PARAM_RAW_TRIMMED));
+                    if (!empty($values[$key])) {
+                        $values2[$key] = '#' . substr($values[$key], 0, 8);
+                    }
                 }
             }
             foreach (\array_keys($names) as $i) {
