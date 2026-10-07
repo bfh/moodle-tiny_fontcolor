@@ -179,28 +179,12 @@ export class Optional {
     return Optional.singletonNone;
   }
 
-  fold(onNone, onSome) {
-    if (this.tag) {
-      return onSome(this.value);
-    } else {
-      return onNone();
-    }
-  }
-
   isSome() {
     return this.tag;
   }
 
   isNone() {
     return !this.tag;
-  }
-
-  map(mapper) {
-    if (this.tag) {
-      return Optional.some(mapper(this.value));
-    } else {
-      return Optional.none();
-    }
   }
 
   bind(binder) {
@@ -219,14 +203,6 @@ export class Optional {
     return !this.tag || predicate(this.value);
   }
 
-  filter(predicate) {
-    if (!this.tag || predicate(this.value)) {
-      return this;
-    } else {
-      return Optional.none();
-    }
-  }
-
   getOr(replacement) {
     return this.tag ? this.value : replacement;
   }
@@ -243,14 +219,6 @@ export class Optional {
     return this.tag ? this : thunk();
   }
 
-  getOrDie(message) {
-    if (!this.tag) {
-      throw new Error(message ?? 'Called getOrDie on None');
-    } else {
-      return this.value;
-    }
-  }
-
   static from(value) {
     return isNonNullable(value) ? Optional.some(value) : Optional.none();
   }
@@ -259,22 +227,10 @@ export class Optional {
     return this.tag ? this.value : null;
   }
 
-  getOrUndefined() {
-    return this.value;
-  }
-
   each(worker) {
     if (this.tag) {
       worker(this.value);
     }
-  }
-
-  toArray() {
-    return this.tag ? [this.value] : [];
-  }
-
-  toString() {
-    return this.tag ? `some(${this.value})` : 'none()';
   }
 }
 

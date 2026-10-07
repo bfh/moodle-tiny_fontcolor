@@ -112,10 +112,6 @@ class color_list {
      */
     public function get_css_class_list(?string $prefix = ''): array {
         $list = [];
-        if ($this->colors === null) {
-            return $list;
-        }
-
         foreach ($this->colors as $color) {
             $sanitized = preg_replace('/[^a-z]/', '', strtolower(strip_tags($color->get_name())));
             if (empty($sanitized)) {
