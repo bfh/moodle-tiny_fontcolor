@@ -78,16 +78,6 @@ class plugininfo extends plugin implements plugin_with_buttons, plugin_with_conf
     }
 
     /**
-     * Return base directory of the plugin.
-     * @return string
-     */
-    public static function get_base_dir(): string {
-        global $CFG;
-        $dir = str_replace($CFG->dirroot, '', realpath(__DIR__));
-        return (new moodle_url(substr($dir, 0, strrpos($dir, DIRECTORY_SEPARATOR))))->out();
-    }
-
-    /**
      * Returns the configuration values the plugin needs to take into consideration
      *
      * @param context $context

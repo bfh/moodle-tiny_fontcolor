@@ -56,7 +56,7 @@ class admin_setting_colorlist extends admin_setting {
      * @throws \coding_exception
      */
     public function output_html($data, $query = '') {
-        global $OUTPUT;
+        global $OUTPUT, $PAGE;
 
         // The original object is destroyed, so we don't have information about the error. However, if
         // we identify the value being sent from the current post, then just fetch the original data again
@@ -85,7 +85,6 @@ class admin_setting_colorlist extends admin_setting {
             'name' => $this->get_full_name(),
             'value' => static::PLACEHOLDER_ORIG_VALUE,
             'forceltr' => $this->get_force_ltr(),
-            'plugindir' => plugininfo::get_base_dir(),
             'readonly' => $this->is_readonly(),
             'colors' => [],
         ];
@@ -108,6 +107,8 @@ class admin_setting_colorlist extends admin_setting {
             $i++;
             $context->colors[] = $row;
         }
+        $PAGE->requires->js(new \moodle_url('/lib/editor/tiny/plugins/fontcolor/js/jscolor/jscolor.min.js'));
+        $PAGE->requires->js_call_amd('tiny_fontcolor/color-settings', 'init', [$this->get_full_name()]);
         $html = $OUTPUT->render_from_template('tiny_fontcolor/settings_config_color', $context);
 
         return format_admin_setting($this, $this->visiblename, $html, $this->description, true, '', $default, $query);

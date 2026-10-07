@@ -47,7 +47,6 @@
         "id": "created_id_of_settings_field",
         "name": "created_name_of_settings_field",
         "readonly": false,
-        "plugindir": "/lib/editor/tiny/plugins/fontcolor",
         "size": 15,
         "colors": [
             {
@@ -123,17 +122,3 @@
     </div>
 {{/colors}}
 </div>
-
-<script src="{{ plugindir }}/js/jscolor/jscolor.min.js"></script>
-
-{{#js}}
-require(
-[
-    'tiny_fontcolor/color-settings',
-],
-function(
-    ColorSettings
-) {
-    ColorSettings.init('{{name}}');
-});
-{{/js}}
